@@ -1,7 +1,7 @@
 
 import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar, IconButton, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; // Assuming you're using Clerk for auth
 export default function HomePage() {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -11,8 +11,15 @@ export default function HomePage() {
           <Typography variant="h6" sx={{ flexGrow: 1, color: 'black', fontWeight: 'bold' }}>
             Careerplannr AI
           </Typography>
-          <Button color="inherit" sx={{ color: 'black', textTransform: 'none', marginRight: 2 }}>Log In</Button>
-          <Button variant="contained" color="primary" sx={{ textTransform: 'none' }}>Create Account</Button>
+          
+            {/* Show UserButton when signed in, and Log In / Sign Up buttons when signed out */}
+            <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+          <SignedOut>
+            <Button color="inherit" href="/sign-in" sx={{ color: 'black', textTransform: 'none', marginRight: 2 }}>Log In</Button>
+            <Button variant="contained" color="primary" href="/sign-up" sx={{ textTransform: 'none' }}>Create Account</Button>
+          </SignedOut>
         </Toolbar>
       </AppBar>
 
