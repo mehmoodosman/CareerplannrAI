@@ -72,7 +72,7 @@ export default function HomePage() {
           <Grid item xs={12} sm={4}>
             <Box sx={{
               bgcolor: '#1e1e1e', borderRadius: '15px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
-              transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
+              height: '100%', transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
             }}>
               <Typography variant="h5" fontWeight="bold" gutterBottom sx={{
                 color: '#e91e63', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 8px rgba(233, 30, 99, 0.6)'
@@ -89,7 +89,7 @@ export default function HomePage() {
           <Grid item xs={12} sm={4}>
             <Box sx={{
               bgcolor: '#1e1e1e', borderRadius: '15px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
-              transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
+              height: '100%', transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
             }}>
               <Typography variant="h5" fontWeight="bold" gutterBottom sx={{
                 color: '#e91e63', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 8px rgba(233, 30, 99, 0.6)'
@@ -106,7 +106,7 @@ export default function HomePage() {
           <Grid item xs={12} sm={4}>
             <Box sx={{
               bgcolor: '#1e1e1e', borderRadius: '15px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
-              transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
+              height: '100%', transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
             }}>
               <Typography variant="h5" fontWeight="bold" gutterBottom sx={{
                 color: '#e91e63', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 8px rgba(233, 30, 99, 0.6)'
@@ -125,245 +125,130 @@ export default function HomePage() {
 
       {/* Subscription Plans */}
       <Container maxWidth="lg" sx={{ marginBottom: 10 }}>
-      <Typography
-        variant="h3"
-        fontWeight="bold"
-        textAlign="center"
-        marginBottom={6}
-        sx={{
-          fontFamily: 'Roboto, sans-serif',
-          color: '#ffffff',
-          textShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
-        }}
-      >
-        Our Subscription Plans
-      </Typography>
-      <Grid container spacing={6} justifyContent="center">
+        <Typography
+          variant="h3"
+          fontWeight="bold"
+          textAlign="center"
+          marginBottom={6}
+          sx={{
+            fontFamily: 'Roboto, sans-serif',
+            color: '#ffffff',
+            textShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
+          }}
+        >
+          Our Subscription Plans
+        </Typography>
+        
+        <Grid container spacing={6} justifyContent="center">
+
         <Grid item xs={12} sm={4}>
-          <Card
-            sx={{
-              textAlign: 'center',
-              padding: 4,
-              borderRadius: '20px',
-              bgcolor: '#2c2c2c',
-              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
-              transition: 'transform 0.3s, box-shadow 0.3s',
-              ':hover': {
-                transform: 'scale(1.05)',
-                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
-              },
-            }}
-          >
-            <CardContent>
-              <Typography
-                variant="h5"
-                fontWeight="bold"
-                sx={{
-                  fontFamily: 'Roboto, sans-serif',
-                  color: '#e91e63',
-                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
-                }}
-              >
-                Free Plan
-              </Typography>
-              <Typography
-                variant="h4"
-                color="primary"
-                gutterBottom
-                sx={{
-                  fontFamily: 'Roboto, sans-serif',
-                  color: '#e91e63',
-                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
-                }}
-              >
-                FREE
-              </Typography>
-              <Typography
-                color="textSecondary"
-                sx={{
-                  color: '#bbbbbb',
-                  fontFamily: 'Roboto, sans-serif',
-                  marginBottom: 4,
-                }}
-              >
+            <Card
+              sx={{
+                textAlign: 'center',
+                padding: 4,
+                borderRadius: '20px',
+                bgcolor: '#2c2c2c',
+                color: '#ffffff',
+                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)',
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 25px rgba(0, 0, 0, 0.5)' }
+              }}
+            >
+              <CardContent>
+                <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#e91e63' }}>
+                  Basic Plan
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  FREE
+                </Typography>
+                <Typography variant="body1" paragraph>
                 Access to limited features
                 <br />
                 Limited Career path suggestions
-                <br />
-                No Career Roadmaps access
-              </Typography>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: '#e91e63',
-                  color: 'white',
-                  textTransform: 'none',
-                  fontWeight: 'bold',
-                  borderRadius: '25px',
-                  padding: '12px 28px',
-                  boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
-                  ':hover': {
-                    backgroundColor: '#c2185b',
-                    boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)',
-                  },
-                }}
-              >
-                Subscribe
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Card
-            sx={{
-              textAlign: 'center',
-              padding: 4,
-              borderRadius: '20px',
-              bgcolor: '#2c2c2c',
-              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
-              transition: 'transform 0.3s, box-shadow 0.3s',
-              ':hover': {
-                transform: 'scale(1.05)',
-                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
-              },
-            }}
-          >
-            <CardContent>
-              <Typography
-                variant="h5"
-                fontWeight="bold"
-                sx={{
-                  fontFamily: 'Roboto, sans-serif',
-                  color: '#e91e63',
-                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
-                }}
-              >
-                Standard Plan
-              </Typography>
-              <Typography
-                variant="h4"
-                color="primary"
-                gutterBottom
-                sx={{
-                  fontFamily: 'Roboto, sans-serif',
-                  color: '#e91e63',
-                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
-                }}
-              >
-                $5/month
-              </Typography>
-              <Typography
-                color="textSecondary"
-                sx={{
-                  color: '#bbbbbb',
-                  fontFamily: 'Roboto, sans-serif',
-                  marginBottom: 4,
-                }}
-              >
-                Access to all features
-                <br />
-                Unlimited Career path suggestions
-                <br />
-                Limited Career Roadmaps access
-              </Typography>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: '#e91e63',
-                  color: 'white',
-                  textTransform: 'none',
-                  fontWeight: 'bold',
-                  borderRadius: '25px',
-                  padding: '12px 28px',
-                  boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
-                  ':hover': {
-                    backgroundColor: '#c2185b',
-                    boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)',
-                  },
-                }}
-              >
-                Subscribe
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Card
-            sx={{
-              textAlign: 'center',
-              padding: 4,
-              borderRadius: '20px',
-              bgcolor: '#2c2c2c',
-              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
-              transition: 'transform 0.3s, box-shadow 0.3s',
-              ':hover': {
-                transform: 'scale(1.05)',
-                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
-              },
-            }}
-          >
-            <CardContent>
-              <Typography
-                variant="h5"
-                fontWeight="bold"
-                sx={{
-                  fontFamily: 'Roboto, sans-serif',
-                  color: '#e91e63',
-                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
-                }}
-              >
-                Pro Plan
-              </Typography>
-              <Typography
-                variant="h4"
-                color="primary"
-                gutterBottom
-                sx={{
-                  fontFamily: 'Roboto, sans-serif',
-                  color: '#e91e63',
-                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
-                }}
-              >
-                $10/month
-              </Typography>
-              <Typography
-                color="textSecondary"
-                sx={{
-                  color: '#bbbbbb',
-                  fontFamily: 'Roboto, sans-serif',
-                  marginBottom: 4,
-                }}
-              >
-                Access to all features
-                <br />
-                Unlimited Career path suggestions
-                <br />
-                Unlimited Career Roadmaps access
-              </Typography>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: '#e91e63',
-                  color: 'white',
-                  textTransform: 'none',
-                  fontWeight: 'bold',
-                  borderRadius: '25px',
-                  padding: '12px 28px',
-                  boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
-                  ':hover': {
-                    backgroundColor: '#c2185b',
-                    boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)',
-                  },
-                }}
-              >
-                Subscribe
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </Container>
 
+                </Typography>
+                <Button variant="contained" sx={{
+                  backgroundColor: '#e91e63', color: 'white', borderRadius: '25px',
+                  padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.3)',
+                  ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)' }
+                }}>
+                  Subscribe Now
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+
+
+          
+          <Grid item xs={12} sm={4}>
+            <Card
+              sx={{
+                textAlign: 'center',
+                padding: 4,
+                borderRadius: '20px',
+                bgcolor: '#2c2c2c',
+                color: '#ffffff',
+                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)',
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 25px rgba(0, 0, 0, 0.5)' }
+              }}
+            >
+              <CardContent>
+                <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#e91e63' }}>
+                  Basic Plan
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  $5 / month
+                </Typography>
+                <Typography variant="body1" paragraph>
+                  Access to basic features and career recommendations.
+                </Typography>
+                <Button variant="contained" sx={{
+                  backgroundColor: '#e91e63', color: 'white', borderRadius: '25px',
+                  padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.3)',
+                  ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)' }
+                }}>
+                  Subscribe Now
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Card
+              sx={{
+                textAlign: 'center',
+                padding: 4,
+                borderRadius: '20px',
+                bgcolor: '#2c2c2c',
+                color: '#ffffff',
+                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)',
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 25px rgba(0, 0, 0, 0.5)' }
+              }}
+            >
+              <CardContent>
+                <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#e91e63' }}>
+                  Pro Plan
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  $10 / month
+                </Typography>
+                <Typography variant="body1" paragraph>
+                  Unlock advanced features and personalized recommendations.
+                </Typography>
+                <Button variant="contained" sx={{
+                  backgroundColor: '#e91e63', color: 'white', borderRadius: '25px',
+                  padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.3)',
+                  ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)' }
+                }}>
+                  Subscribe Now
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
       {/* Footer */}
       <Box sx={{
         bgcolor: '#1e1e1e', padding: 3, borderTop: '4px solid #e91e63', position: 'relative', bottom: 0, width: '100%',
@@ -388,3 +273,4 @@ export default function HomePage() {
     </Box>
   );
 }
+
