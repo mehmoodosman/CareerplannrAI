@@ -5,6 +5,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 export default function HomePage() {
   return (
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
+
+
       {/* Navbar */}
       <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
         <Toolbar>
@@ -33,6 +35,7 @@ export default function HomePage() {
           </Link>
         </Toolbar>
       </AppBar>
+
 
       {/* Hero Section */}
       <Container maxWidth="md" sx={{ textAlign: 'center', marginTop: 8 }}>
@@ -65,6 +68,7 @@ export default function HomePage() {
           Start Your Career Exploration
         </Button>
       </Container>
+
 
       {/* Features Section */}
       <Container maxWidth="lg" sx={{ marginBottom: 12 }}>
@@ -123,6 +127,7 @@ export default function HomePage() {
         </Grid>
       </Container>
 
+
       {/* Subscription Plans */}
       <Container maxWidth="lg" sx={{ marginBottom: 10 }}>
         <Typography
@@ -177,8 +182,6 @@ export default function HomePage() {
               </CardContent>
             </Card>
           </Grid>
-
-
           
           <Grid item xs={12} sm={4}>
             <Card
@@ -249,6 +252,8 @@ export default function HomePage() {
           </Grid>
         </Grid>
       </Container>
+
+
       {/* Footer */}
       <Box sx={{
         bgcolor: '#1e1e1e', padding: 3, borderTop: '4px solid #e91e63', position: 'relative', bottom: 0, width: '100%',
