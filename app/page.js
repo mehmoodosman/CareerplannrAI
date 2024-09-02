@@ -50,7 +50,7 @@ export default function HomePage() {
         </Typography>
         <Box
           component="img"
-          src="/image.png" // Replace with your actual image path
+          src="/Image.png"
           alt="Careerplannr AI"
           sx={{
             maxWidth: '100%', height: 'auto', borderRadius: '25px', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.2)',
