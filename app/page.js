@@ -1,158 +1,390 @@
-import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar, IconButton, Box } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar, Box, IconButton } from '@mui/material';
+import Link from 'next/link';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function HomePage() {
   return (
-    <Box sx={{ flexGrow: 1, bgcolor: '#f8f9fa' }}>
+    <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
       {/* Navbar */}
-      <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: 'none', borderBottom: '2px solid #e0e0e0' }}>
+      <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
         <Toolbar>
-          <Typography variant="h4" sx={{ flexGrow: 1, color: '#333', fontWeight: 'bold', fontFamily: 'Montserrat, sans-serif' }}>
+          <Typography variant="h4" sx={{
+            flexGrow: 1, color: '#ffffff', fontWeight: 'bold', fontFamily: 'Roboto, sans-serif',
+            textShadow: '0 0 10px rgba(233, 30, 99, 0.7)'
+          }}>
             Careerplannr AI
           </Typography>
-          <Button color="inherit" sx={{ color: '#333', textTransform: 'none', marginRight: 2, fontWeight: 'bold', ':hover': { color: '#007bff' } }}>Log In</Button>
-          <Button variant="contained" sx={{
-            backgroundColor: '#007bff', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '20px',
-            ':hover': { backgroundColor: '#0056b3' }
-          }}>Create Account</Button>
+          <Link href="/sign-in" passHref>
+            <Button color="inherit" sx={{
+              color: '#ffffff', textTransform: 'none', marginRight: 2, fontWeight: 'bold', borderRadius: '20px',
+              ':hover': { color: '#e91e63', textShadow: '0 0 10px rgba(233, 30, 99, 0.5)' }
+            }}>
+              Log In
+            </Button>
+          </Link>
+          <Link href="/sign-up" passHref>
+            <Button variant="contained" sx={{
+              backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
+              padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.4)',
+              ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.6)' }
+            }}>
+              Create Account
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
 
       {/* Hero Section */}
-      <Container maxWidth="md" sx={{ textAlign: 'center', marginTop: 6 }}>
-        <Typography variant="h2" gutterBottom sx={{ fontWeight: 'bold', fontFamily: 'Montserrat, sans-serif', color: '#333' }}>
+      <Container maxWidth="md" sx={{ textAlign: 'center', marginTop: 8 }}>
+        <Typography variant="h2" gutterBottom sx={{
+          fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
+          textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
+        }}>
           Welcome to Careerplannr AI
         </Typography>
-        <Typography variant="h5" color="textSecondary" gutterBottom sx={{ fontFamily: 'Montserrat, sans-serif', color: '#555' }}>
+        <Typography variant="h5" color="textSecondary" gutterBottom sx={{
+          fontFamily: 'Roboto, sans-serif', color: '#bbbbbb',
+          textShadow: '0 0 10px rgba(255, 255, 255, 0.5)'
+        }}>
           Your ultimate tool for career exploration and planning. Unlock your potential today!
         </Typography>
         <Box
           component="img"
           src="/image.png" // Replace with your actual image path
           alt="Careerplannr AI"
-          sx={{ maxWidth: '100%', height: 'auto', borderRadius: '15px', boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)', marginTop: 4, marginBottom: 4 }}
+          sx={{
+            maxWidth: '100%', height: 'auto', borderRadius: '25px', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.2)',
+            marginTop: 4, marginBottom: 4, transition: 'transform 0.5s', ':hover': { transform: 'scale(1.05)' }
+          }}
         />
         <Button variant="contained" size="large" sx={{
-          backgroundColor: '#007bff', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '30px',
-          padding: '12px 36px', marginBottom: 8, ':hover': { backgroundColor: '#0056b3' }
+          backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
+          padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+          ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
         }}>
           Start Your Career Exploration
         </Button>
       </Container>
 
       {/* Features Section */}
-      <Container maxWidth="lg" sx={{ marginBottom: 10 }}>
+      <Container maxWidth="lg" sx={{ marginBottom: 12 }}>
         <Grid container spacing={6} textAlign="center">
           <Grid item xs={12} sm={4}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#333', fontFamily: 'Montserrat, sans-serif' }}>
-              Personalized Recommendations
-            </Typography>
-            <Typography color="textSecondary" sx={{ color: '#555', fontFamily: 'Montserrat, sans-serif' }}>
-              Get career suggestions tailored to your skills and interests.
-            </Typography>
+            <Box sx={{
+              bgcolor: '#1e1e1e', borderRadius: '15px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
+              transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
+            }}>
+              <Typography variant="h5" fontWeight="bold" gutterBottom sx={{
+                color: '#e91e63', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 8px rgba(233, 30, 99, 0.6)'
+              }}>
+                Personalized Recommendations
+              </Typography>
+              <Typography color="textSecondary" sx={{
+                color: '#bbbbbb', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 5px rgba(255, 255, 255, 0.5)'
+              }}>
+                Get career suggestions tailored to your skills and interests.
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#333', fontFamily: 'Montserrat, sans-serif' }}>
-              Comprehensive Career Paths
-            </Typography>
-            <Typography color="textSecondary" sx={{ color: '#555', fontFamily: 'Montserrat, sans-serif' }}>
-              Explore detailed career paths and what it takes to achieve your goals.
-            </Typography>
+            <Box sx={{
+              bgcolor: '#1e1e1e', borderRadius: '15px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
+              transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
+            }}>
+              <Typography variant="h5" fontWeight="bold" gutterBottom sx={{
+                color: '#e91e63', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 8px rgba(233, 30, 99, 0.6)'
+              }}>
+                Comprehensive Career Paths
+              </Typography>
+              <Typography color="textSecondary" sx={{
+                color: '#bbbbbb', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 5px rgba(255, 255, 255, 0.5)'
+              }}>
+                Explore detailed career paths and what it takes to achieve your goals.
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#333', fontFamily: 'Montserrat, sans-serif' }}>
-              Expert Advice
-            </Typography>
-            <Typography color="textSecondary" sx={{ color: '#555', fontFamily: 'Montserrat, sans-serif' }}>
-              Learn from industry experts and gain insights to advance your career.
-            </Typography>
+            <Box sx={{
+              bgcolor: '#1e1e1e', borderRadius: '15px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
+              transition: 'transform 0.3s, box-shadow 0.3s', ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.5)' }
+            }}>
+              <Typography variant="h5" fontWeight="bold" gutterBottom sx={{
+                color: '#e91e63', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 8px rgba(233, 30, 99, 0.6)'
+              }}>
+                Expert Advice
+              </Typography>
+              <Typography color="textSecondary" sx={{
+                color: '#bbbbbb', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 5px rgba(255, 255, 255, 0.5)'
+              }}>
+                Learn from industry experts and gain insights to advance your career.
+              </Typography>
+            </Box>
           </Grid>
         </Grid>
       </Container>
 
       {/* Subscription Plans */}
       <Container maxWidth="lg" sx={{ marginBottom: 10 }}>
-        <Typography variant="h3" fontWeight="bold" textAlign="center" marginBottom={6} sx={{ fontFamily: 'Montserrat, sans-serif', color: '#333' }}>
-          Our Subscription Plans
-        </Typography>
-        <Grid container spacing={6} justifyContent="center">
-          <Grid item xs={12} sm={4}>
-            <Card sx={{ textAlign: 'center', padding: 4, borderRadius: '15px', boxShadow: '0 6px 18px rgba(0, 0, 0, 0.1)' }}>
-              <CardContent>
-                <Typography variant="h5" fontWeight="bold" sx={{ fontFamily: 'Montserrat, sans-serif', color: '#333' }}>
-                  Basic Plan
-                </Typography>
-                <Typography variant="h4" color="primary" gutterBottom sx={{ fontFamily: 'Montserrat, sans-serif', color: '#007bff' }}>
-                  FREE
-                </Typography>
-                <Typography color="textSecondary" sx={{ color: '#555', fontFamily: 'Montserrat, sans-serif', marginBottom: 4 }}>
-                  Access to limited features
-                  <br />
-                  Limited Career path suggestions
-                  <br />
-                  No Career Roadmaps access
-                </Typography>
-                <Button variant="contained" sx={{
-                  backgroundColor: '#007bff', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '20px',
-                  ':hover': { backgroundColor: '#0056b3' }
-                }}>
-                  Subscribe
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card sx={{ textAlign: 'center', padding: 4, borderRadius: '15px', boxShadow: '0 6px 18px rgba(0, 0, 0, 0.1)' }}>
-              <CardContent>
-                <Typography variant="h5" fontWeight="bold" sx={{ fontFamily: 'Montserrat, sans-serif', color: '#333' }}>
-                  Standard Plan
-                </Typography>
-                <Typography variant="h4" color="primary" gutterBottom sx={{ fontFamily: 'Montserrat, sans-serif', color: '#007bff' }}>
-                  $5/month
-                </Typography>
-                <Typography color="textSecondary" sx={{ color: '#555', fontFamily: 'Montserrat, sans-serif', marginBottom: 4 }}>
-                  Access to all features
-                  <br />
-                  Unlimited Career path suggestions
-                  <br />
-                  Limited Career Roadmaps access
-                </Typography>
-                <Button variant="contained" sx={{
-                  backgroundColor: '#007bff', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '20px',
-                  ':hover': { backgroundColor: '#0056b3' }
-                }}>
-                  Subscribe
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card sx={{ textAlign: 'center', padding: 4, borderRadius: '15px', boxShadow: '0 6px 18px rgba(0, 0, 0, 0.1)' }}>
-              <CardContent>
-                <Typography variant="h5" fontWeight="bold" sx={{ fontFamily: 'Montserrat, sans-serif', color: '#333' }}>
-                  Pro Plan
-                </Typography>
-                <Typography variant="h4" color="primary" gutterBottom sx={{ fontFamily: 'Montserrat, sans-serif', color: '#007bff' }}>
-                  $10/month
-                </Typography>
-                <Typography color="textSecondary" sx={{ color: '#555', fontFamily: 'Montserrat, sans-serif', marginBottom: 4 }}>
-                  Access to all features
-                  <br />
-                  Unlimited Career path suggestions
-                  <br />
-                  Unlimited Career Roadmaps access
-                </Typography>
-                <Button variant="contained" sx={{
-                  backgroundColor: '#007bff', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '20px',
-                  ':hover': { backgroundColor: '#0056b3' }
-                }}>
-                  Subscribe
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
+      <Typography
+        variant="h3"
+        fontWeight="bold"
+        textAlign="center"
+        marginBottom={6}
+        sx={{
+          fontFamily: 'Roboto, sans-serif',
+          color: '#ffffff',
+          textShadow: '0 0 10px rgba(255, 255, 255, 0.5)',
+        }}
+      >
+        Our Subscription Plans
+      </Typography>
+      <Grid container spacing={6} justifyContent="center">
+        <Grid item xs={12} sm={4}>
+          <Card
+            sx={{
+              textAlign: 'center',
+              padding: 4,
+              borderRadius: '20px',
+              bgcolor: '#2c2c2c',
+              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+              transition: 'transform 0.3s, box-shadow 0.3s',
+              ':hover': {
+                transform: 'scale(1.05)',
+                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
+              },
+            }}
+          >
+            <CardContent>
+              <Typography
+                variant="h5"
+                fontWeight="bold"
+                sx={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#e91e63',
+                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
+                }}
+              >
+                Free Plan
+              </Typography>
+              <Typography
+                variant="h4"
+                color="primary"
+                gutterBottom
+                sx={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#e91e63',
+                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
+                }}
+              >
+                FREE
+              </Typography>
+              <Typography
+                color="textSecondary"
+                sx={{
+                  color: '#bbbbbb',
+                  fontFamily: 'Roboto, sans-serif',
+                  marginBottom: 4,
+                }}
+              >
+                Access to limited features
+                <br />
+                Limited Career path suggestions
+                <br />
+                No Career Roadmaps access
+              </Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: '#e91e63',
+                  color: 'white',
+                  textTransform: 'none',
+                  fontWeight: 'bold',
+                  borderRadius: '25px',
+                  padding: '12px 28px',
+                  boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+                  ':hover': {
+                    backgroundColor: '#c2185b',
+                    boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)',
+                  },
+                }}
+              >
+                Subscribe
+              </Button>
+            </CardContent>
+          </Card>
         </Grid>
-      </Container>
+        <Grid item xs={12} sm={4}>
+          <Card
+            sx={{
+              textAlign: 'center',
+              padding: 4,
+              borderRadius: '20px',
+              bgcolor: '#2c2c2c',
+              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+              transition: 'transform 0.3s, box-shadow 0.3s',
+              ':hover': {
+                transform: 'scale(1.05)',
+                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
+              },
+            }}
+          >
+            <CardContent>
+              <Typography
+                variant="h5"
+                fontWeight="bold"
+                sx={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#e91e63',
+                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
+                }}
+              >
+                Standard Plan
+              </Typography>
+              <Typography
+                variant="h4"
+                color="primary"
+                gutterBottom
+                sx={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#e91e63',
+                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
+                }}
+              >
+                $5/month
+              </Typography>
+              <Typography
+                color="textSecondary"
+                sx={{
+                  color: '#bbbbbb',
+                  fontFamily: 'Roboto, sans-serif',
+                  marginBottom: 4,
+                }}
+              >
+                Access to all features
+                <br />
+                Unlimited Career path suggestions
+                <br />
+                Limited Career Roadmaps access
+              </Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: '#e91e63',
+                  color: 'white',
+                  textTransform: 'none',
+                  fontWeight: 'bold',
+                  borderRadius: '25px',
+                  padding: '12px 28px',
+                  boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+                  ':hover': {
+                    backgroundColor: '#c2185b',
+                    boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)',
+                  },
+                }}
+              >
+                Subscribe
+              </Button>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Card
+            sx={{
+              textAlign: 'center',
+              padding: 4,
+              borderRadius: '20px',
+              bgcolor: '#2c2c2c',
+              boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+              transition: 'transform 0.3s, box-shadow 0.3s',
+              ':hover': {
+                transform: 'scale(1.05)',
+                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.5)',
+              },
+            }}
+          >
+            <CardContent>
+              <Typography
+                variant="h5"
+                fontWeight="bold"
+                sx={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#e91e63',
+                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
+                }}
+              >
+                Pro Plan
+              </Typography>
+              <Typography
+                variant="h4"
+                color="primary"
+                gutterBottom
+                sx={{
+                  fontFamily: 'Roboto, sans-serif',
+                  color: '#e91e63',
+                  textShadow: '0 0 8px rgba(233, 30, 99, 0.6)',
+                }}
+              >
+                $10/month
+              </Typography>
+              <Typography
+                color="textSecondary"
+                sx={{
+                  color: '#bbbbbb',
+                  fontFamily: 'Roboto, sans-serif',
+                  marginBottom: 4,
+                }}
+              >
+                Access to all features
+                <br />
+                Unlimited Career path suggestions
+                <br />
+                Unlimited Career Roadmaps access
+              </Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: '#e91e63',
+                  color: 'white',
+                  textTransform: 'none',
+                  fontWeight: 'bold',
+                  borderRadius: '25px',
+                  padding: '12px 28px',
+                  boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+                  ':hover': {
+                    backgroundColor: '#c2185b',
+                    boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)',
+                  },
+                }}
+              >
+                Subscribe
+              </Button>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </Container>
+
+      {/* Footer */}
+      <Box sx={{
+        bgcolor: '#1e1e1e', padding: 3, borderTop: '4px solid #e91e63', position: 'relative', bottom: 0, width: '100%',
+      }}>
+        <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
+          <Typography variant="body1" color="" sx={{ marginBottom: 2 }}>
+            © {new Date().getFullYear()} Careerplannr AI. All rights reserved.
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+            <IconButton component="a" href="https://github.com/mehmoodosman" target="_blank" sx={{ color: '#ffffff' }}>
+              <GitHubIcon />
+            </IconButton>
+            <IconButton component="a" href="https://github.com/BarnabasNovak1" target="_blank" sx={{ color: '#ffffff' }}>
+              <GitHubIcon />
+            </IconButton>
+            <IconButton component="a" href="https://github.com/hasantalib" target="_blank" sx={{ color: '#ffffff' }}>
+              <GitHubIcon />
+            </IconButton>
+          </Box>
+        </Container>
+      </Box>
     </Box>
   );
 }
