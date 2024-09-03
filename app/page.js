@@ -282,6 +282,9 @@ export default function HomePage() {
             <IconButton component="a" href="https://github.com/hasantalib" target="_blank" sx={{ color: '#ffffff' }}>
               <GitHubIcon />
             </IconButton>
+            <IconButton component="a" href="https://github.com/ayeshm3" target="_blank" sx={{ color: '#ffffff' }}>
+              <GitHubIcon />
+            </IconButton>
           </Box>
         </Container>
       </Box>
