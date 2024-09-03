@@ -1,5 +1,6 @@
 import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar, Box, IconButton } from '@mui/material';
 import Link from 'next/link';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; // Assuming you're using Clerk for auth
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function HomePage() {
@@ -16,6 +17,11 @@ export default function HomePage() {
           }}>
             Careerplannr AI
           </Typography>
+          <SignedIn>
+          <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+          <SignedOut>
+          <UserButton afterSignOutUrl="/" />
           <Link href="/sign-in" passHref>
             <Button color="inherit" sx={{
               color: '#ffffff', textTransform: 'none', marginRight: 2, fontWeight: 'bold', borderRadius: '20px',
@@ -23,7 +29,9 @@ export default function HomePage() {
             }}>
               Log In
             </Button>
+
           </Link>
+          
           <Link href="/sign-up" passHref>
             <Button variant="contained" sx={{
               backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
@@ -32,7 +40,9 @@ export default function HomePage() {
             }}>
               Create Account
             </Button>
+            
           </Link>
+          </SignedOut>
         </Toolbar>
       </AppBar>
 
