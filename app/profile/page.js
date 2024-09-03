@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { firestore } from '../../firebase/config';  // Make sure your Firebase config is correctly set up
+import { firestore } from '../../firebase/config';  // Ensure your Firebase config is correctly set up
 import { Box, TextField, Button, Typography } from '@mui/material';
 
 const ProfilePage = () => {
- 
   const [profile, setProfile] = useState({
     name: '',
     email: '',
@@ -19,7 +18,6 @@ const ProfilePage = () => {
     e.preventDefault();
 
     try {
-      
       const userRef = firestore.collection('users').doc(); // Creates a new document for the user
       await userRef.set(profile);
       alert('Profile saved successfully!');
@@ -32,16 +30,29 @@ const ProfilePage = () => {
     <Box
       sx={{
         backgroundColor: '#121212',  
-        color: '#fff',  
+        color: '#ffffff',  
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '20px',
+        textAlign: 'center',
       }}
     >
-      <Typography variant="h4" gutterBottom>Complete Your Profile</Typography>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{
+          fontWeight: 'bold',
+          fontFamily: 'Roboto, sans-serif',
+          marginBottom: 4,
+          color: '#ffffff',
+          textShadow: '0 0 10px rgba(255, 255, 255, 0.6)',
+        }}
+      >
+        Complete Your Profile
+      </Typography>
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -51,6 +62,10 @@ const ProfilePage = () => {
           gap: '20px',
           width: '100%',
           maxWidth: '500px',
+          bgcolor: '#1e1e1e',
+          padding: '30px',
+          borderRadius: '15px',
+          boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)',
         }}
       >
         <TextField
@@ -61,10 +76,14 @@ const ProfilePage = () => {
           value={profile.name}
           onChange={handleChange}
           InputProps={{
-            style: { color: '#fff' }, 
+            style: { color: '#ffffff' },
           }}
           InputLabelProps={{
-            style: { color: '#fff' },
+            style: { color: '#b0b0b0' },
+          }}
+          sx={{
+            bgcolor: '#333333',
+            borderRadius: '5px',
           }}
         />
         <TextField
@@ -76,10 +95,14 @@ const ProfilePage = () => {
           value={profile.email}
           onChange={handleChange}
           InputProps={{
-            style: { color: '#fff' }, 
+            style: { color: '#ffffff' },
           }}
           InputLabelProps={{
-            style: { color: '#fff' },  
+            style: { color: '#b0b0b0' },
+          }}
+          sx={{
+            bgcolor: '#333333',
+            borderRadius: '5px',
           }}
         />
         <TextField
@@ -92,10 +115,14 @@ const ProfilePage = () => {
           value={profile.careerPreferences}
           onChange={handleChange}
           InputProps={{
-            style: { color: '#fff' },  
+            style: { color: '#ffffff' },
           }}
           InputLabelProps={{
-            style: { color: '#fff' }, 
+            style: { color: '#b0b0b0' },
+          }}
+          sx={{
+            bgcolor: '#333333',
+            borderRadius: '5px',
           }}
         />
         <TextField
@@ -108,17 +135,28 @@ const ProfilePage = () => {
           value={profile.skills}
           onChange={handleChange}
           InputProps={{
-            style: { color: '#fff' },  
+            style: { color: '#ffffff' },
           }}
           InputLabelProps={{
-            style: { color: '#fff' },  
+            style: { color: '#b0b0b0' },
+          }}
+          sx={{
+            bgcolor: '#333333',
+            borderRadius: '5px',
           }}
         />
         <Button
           type="submit"
           variant="contained"
           color="primary"
-          sx={{ mt: 2 }}
+          sx={{
+            mt: 2,
+            bgcolor: '#1a73e8',
+            '&:hover': {
+              bgcolor: '#155ab2',
+            },
+            borderRadius: '5px',
+          }}
         >
           Save Profile
         </Button>
@@ -128,4 +166,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-
