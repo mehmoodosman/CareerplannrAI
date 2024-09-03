@@ -190,4 +190,24 @@ export default function HomePage() {
       </Box>
     </Box>
   );
+// app/sign-up/[...rest]/page.js
+
+import { Box } from '@mui/material';
+import { SignUp } from '@clerk/nextjs';
+
+export default function SignUpPage() {
+    return (
+        <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            height="100vh"
+        >
+            <SignUp
+                routing="hash"
+                afterSignUpUrl="/profile"  
+            />
+        </Box>
+    );
 }
