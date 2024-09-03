@@ -1,13 +1,19 @@
 import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar, Box, IconButton } from '@mui/material';
 import Link from 'next/link';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; // Assuming you're using Clerk for auth
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import CareerRecommender from './components/CareerRecommender'; // Import the CareerRecommender component
 
 export default function HomePage() {
+  // Example user profile, replace with real data
+  const userProfile = {
+    name: "John Doe",
+    interests: ["Technology", "Data Science", "Marketing"],
+    skills: ["JavaScript", "Python", "SEO"]
+  };
+
   return (
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
-
-
       {/* Navbar */}
       <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
         <Toolbar>
@@ -18,34 +24,30 @@ export default function HomePage() {
             Careerplannr AI
           </Typography>
           <SignedIn>
-          <UserButton afterSignOutUrl="/" />
+            <UserButton afterSignOutUrl="/" />
           </SignedIn>
           <SignedOut>
-          <UserButton afterSignOutUrl="/" />
-          <Link href="/sign-in" passHref>
-            <Button color="inherit" sx={{
-              color: '#ffffff', textTransform: 'none', marginRight: 2, fontWeight: 'bold', borderRadius: '20px',
-              ':hover': { color: '#e91e63', textShadow: '0 0 10px rgba(233, 30, 99, 0.5)' }
-            }}>
-              Log In
-            </Button>
-
-          </Link>
-          
-          <Link href="/sign-up" passHref>
-            <Button variant="contained" sx={{
-              backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
-              padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.4)',
-              ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.6)' }
-            }}>
-              Create Account
-            </Button>
-            
-          </Link>
+            <UserButton afterSignOutUrl="/" />
+            <Link href="/sign-in" passHref>
+              <Button color="inherit" sx={{
+                color: '#ffffff', textTransform: 'none', marginRight: 2, fontWeight: 'bold', borderRadius: '20px',
+                ':hover': { color: '#e91e63', textShadow: '0 0 10px rgba(233, 30, 99, 0.5)' }
+              }}>
+                Log In
+              </Button>
+            </Link>
+            <Link href="/sign-up" passHref>
+              <Button variant="contained" sx={{
+                backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
+                padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.4)',
+                ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.6)' }
+              }}>
+                Create Account
+              </Button>
+            </Link>
           </SignedOut>
         </Toolbar>
       </AppBar>
-
 
       {/* Hero Section */}
       <Container maxWidth="md" sx={{ textAlign: 'center', marginTop: 8 }}>
@@ -79,6 +81,10 @@ export default function HomePage() {
         </Button>
       </Container>
 
+      {/* Career Recommender Section */}
+      <Container maxWidth="lg" sx={{ marginY: 8 }}>
+        <CareerRecommender userProfile={userProfile} />
+      </Container>
 
       {/* Features Section */}
       <Container maxWidth="lg" sx={{ marginBottom: 12 }}>
@@ -130,13 +136,12 @@ export default function HomePage() {
               <Typography color="textSecondary" sx={{
                 color: '#bbbbbb', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 5px rgba(255, 255, 255, 0.5)'
               }}>
-                Learn from industry experts and gain insights to advance your career.
+                Get insights and tips from industry experts to boost your career.
               </Typography>
             </Box>
           </Grid>
         </Grid>
       </Container>
-
 
       {/* Subscription Plans */}
       <Container maxWidth="lg" sx={{ marginBottom: 10 }}>
@@ -155,121 +160,16 @@ export default function HomePage() {
         </Typography>
         
         <Grid container spacing={6} justifyContent="center">
-
-        <Grid item xs={12} sm={4}>
-            <Card
-              sx={{
-                textAlign: 'center',
-                padding: 4,
-                borderRadius: '20px',
-                bgcolor: '#2c2c2c',
-                color: '#ffffff',
-                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)',
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 25px rgba(0, 0, 0, 0.5)' }
-              }}
-            >
-              <CardContent>
-                <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#e91e63' }}>
-                  Basic Plan
-                </Typography>
-                <Typography variant="h6" gutterBottom>
-                  FREE
-                </Typography>
-                <Typography variant="body1" paragraph>
-                Access to limited features
-                <br />
-                Limited Career path suggestions
-
-                </Typography>
-                <Button variant="contained" sx={{
-                  backgroundColor: '#e91e63', color: 'white', borderRadius: '25px',
-                  padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.3)',
-                  ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)' }
-                }}>
-                  Subscribe Now
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} sm={4}>
-            <Card
-              sx={{
-                textAlign: 'center',
-                padding: 4,
-                borderRadius: '20px',
-                bgcolor: '#2c2c2c',
-                color: '#ffffff',
-                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)',
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 25px rgba(0, 0, 0, 0.5)' }
-              }}
-            >
-              <CardContent>
-                <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#e91e63' }}>
-                  Basic Plan
-                </Typography>
-                <Typography variant="h6" gutterBottom>
-                  $5 / month
-                </Typography>
-                <Typography variant="body1" paragraph>
-                  Access to basic features and career recommendations.
-                </Typography>
-                <Button variant="contained" sx={{
-                  backgroundColor: '#e91e63', color: 'white', borderRadius: '25px',
-                  padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.3)',
-                  ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)' }
-                }}>
-                  Subscribe Now
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} sm={4}>
-            <Card
-              sx={{
-                textAlign: 'center',
-                padding: 4,
-                borderRadius: '20px',
-                bgcolor: '#2c2c2c',
-                color: '#ffffff',
-                boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)',
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 25px rgba(0, 0, 0, 0.5)' }
-              }}
-            >
-              <CardContent>
-                <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#e91e63' }}>
-                  Pro Plan
-                </Typography>
-                <Typography variant="h6" gutterBottom>
-                  $10 / month
-                </Typography>
-                <Typography variant="body1" paragraph>
-                  Unlock advanced features and personalized recommendations.
-                </Typography>
-                <Button variant="contained" sx={{
-                  backgroundColor: '#e91e63', color: 'white', borderRadius: '25px',
-                  padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.3)',
-                  ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)' }
-                }}>
-                  Subscribe Now
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
+          {/* Subscription Cards */}
         </Grid>
       </Container>
-
 
       {/* Footer */}
       <Box sx={{
         bgcolor: '#1e1e1e', padding: 3, borderTop: '4px solid #e91e63', position: 'relative', bottom: 0, width: '100%',
       }}>
         <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
-          <Typography variant="body1" color="" sx={{ marginBottom: 2 }}>
+          <Typography variant="body1" sx={{ marginBottom: 2 }}>
             © {new Date().getFullYear()} Careerplannr AI. All rights reserved.
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
@@ -291,4 +191,3 @@ export default function HomePage() {
     </Box>
   );
 }
-
