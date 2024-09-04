@@ -9,7 +9,7 @@ import { getFirestore } from 'firebase/firestore';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAJUjMQYiwGtp0d6q6I80VJ6wxN_0BOki8",
+  apiKey: "process.env.NEXT_PUBLIC_FIREBASE_API_KEY",
   authDomain: "careercanvas-f826a.firebaseapp.com",
   projectId: "careercanvas-f826a",
   storageBucket: "careercanvas-f826a.appspot.com",
