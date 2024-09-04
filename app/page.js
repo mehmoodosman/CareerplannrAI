@@ -2,7 +2,7 @@ import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar
 import Link from 'next/link';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import CareerRecommender from './components/CareerRecommender'; // Import the CareerRecommender component
+import CareerRecommender from './CareerRecommender'; // Import the CareerRecommender component
 
 export default function HomePage() {
   // Example user profile, replace with real data
@@ -191,23 +191,3 @@ export default function HomePage() {
     </Box>
   );
 }  
-// app/sign-up/[...rest]/page.js
-
-import { SignUp } from '@clerk/nextjs';
-
-export default function SignUpPage() {
-    return (
-        <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            height="100vh"
-        >
-            <SignUp
-                routing="hash"
-                afterSignUpUrl="/profile"  
-            />
-        </Box>
-    );
-}

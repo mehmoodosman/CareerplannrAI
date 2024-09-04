@@ -1,3 +1,4 @@
+'use client'
 // File: app/components/CareerRecommender.js
 import React, { useState, useEffect } from 'react';
 import { Container, Grid, Typography, CircularProgress } from '@mui/material';
