@@ -2,9 +2,11 @@ import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar
 import Link from 'next/link';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; // Assuming you're using Clerk for auth
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { Analytics } from "@vercel/analytics/react"
 
 export default function HomePage() {
   return (
+    <>
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
 
 
@@ -286,5 +288,7 @@ export default function HomePage() {
         </Container>
       </Box>
     </Box>
-  );
+    <Analytics/>
+   </> 
+  )
 }
