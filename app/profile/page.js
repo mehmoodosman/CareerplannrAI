@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react';
 import { firestore } from '../../firebase/config';  // Ensure your Firebase config is correctly set up
 import { Box, TextField, Button, Typography } from '@mui/material';
