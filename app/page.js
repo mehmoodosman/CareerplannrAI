@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; // Assuming you're using Clerk for auth
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Analytics } from "@vercel/analytics/react"
+import Image from 'next/image'
 
 export default function HomePage() {
   return (
@@ -13,38 +14,56 @@ export default function HomePage() {
       {/* Navbar */}
       <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
         <Toolbar>
-          <Typography variant="h6" sx={{
-            flexGrow: 1, color: '#ffffff', fontWeight: 'bold', fontFamily: 'Roboto, sans-serif',
-            textShadow: '0 0 10px rgba(233, 30, 99, 0.7)'
-          }}>
-            Careerplannr AI
-          </Typography>
-          <SignedIn>
-          <UserButton afterSignOutUrl="/" />
-          </SignedIn>
-          <SignedOut>
-          <UserButton afterSignOutUrl="/" />
-          <Link href="/sign-in" passHref>
-            <Button color="inherit" sx={{
-              color: '#ffffff', textTransform: 'none', marginRight: 2, fontWeight: 'bold', borderRadius: '20px',
-              ':hover': { color: '#e91e63', textShadow: '0 0 10px rgba(233, 30, 99, 0.5)' }
-            }}>
-              Log In
-            </Button>
+          <Box sx={{ flexGrow: 1 }}>
+            <Image 
+              src="/CareerSwipe.svg"  
+              alt="CareerSwipe Logo"
+              width={100}  
+              height={100}
+              sx={{ objectFit: 'contain' }}
+            />
+          </Box>
 
-          </Link>
-          
-          <Link href="/sign-up" passHref>
-            <Button variant="contained" sx={{
-              backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
-              padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.4)',
-              ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.6)' }
-            }}>
-              Create Account
-            </Button>
-            
-          </Link>
-          </SignedOut>
+          {/* User buttons on the right end */}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <SignedOut>
+              <Link href="/sign-in" passHref>
+                <Button
+                  color="inherit"
+                  sx={{
+                    color: '#ffffff',
+                    textTransform: 'none',
+                    marginRight: 2,
+                    fontWeight: 'bold',
+                    borderRadius: '20px',
+                    ':hover': { color: '#e91e63', textShadow: '0 0 10px rgba(233, 30, 99, 0.5)' },
+                  }}
+                >
+                  Log In
+                </Button>
+              </Link>
+              <Link href="/sign-up" passHref>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: '#e91e63',
+                    color: 'white',
+                    textTransform: 'none',
+                    fontWeight: 'bold',
+                    borderRadius: '25px',
+                    padding: '10px 20px',
+                    boxShadow: '0 4px 15px rgba(233, 30, 99, 0.4)',
+                    ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.6)' },
+                  }}
+                >
+                  Create Account
+                </Button>
+              </Link>
+            </SignedOut>
+          </Box>
         </Toolbar>
       </AppBar>
 
