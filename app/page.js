@@ -190,9 +190,9 @@ export default function HomePage() {
       </Box>
     </Box>
   );
+}  
 // app/sign-up/[...rest]/page.js
 
-import { Box } from '@mui/material';
 import { SignUp } from '@clerk/nextjs';
 
 export default function SignUpPage() {
