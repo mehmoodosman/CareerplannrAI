@@ -17,7 +17,7 @@ export default function HomePage() {
       {/* Navbar */}
       <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
         <Toolbar>
-          <Typography variant="h4" sx={{
+          <Typography variant="h6" sx={{
             flexGrow: 1, color: '#ffffff', fontWeight: 'bold', fontFamily: 'Roboto, sans-serif',
             textShadow: '0 0 10px rgba(233, 30, 99, 0.7)'
           }}>
@@ -51,7 +51,7 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <Container maxWidth="md" sx={{ textAlign: 'center', marginTop: 8 }}>
-        <Typography variant="h2" gutterBottom sx={{
+        <Typography variant="h3" gutterBottom sx={{
           fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
           textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
         }}>
