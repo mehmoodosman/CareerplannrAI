@@ -56,13 +56,18 @@ export default function CareerPage() {
         rows={8}
         variant="outlined"
         sx={{
-          bgcolor: '#2c2c2c',
-          width: '100%',
-          borderRadius: '8px',
-          input: { color: '#ffffff' },
-          '& .MuiInputBase-input::placeholder': { color: '#ffffff' },
-            }}
-          />
+        bgcolor: '#2c2c2c',
+        width: '100%',
+        borderRadius: '8px',
+        input: { color: '#ffffff' }, 
+        '& .MuiInputBase-input::placeholder': { color: '#ffffff' }, 
+          '& .MuiOutlinedInput-root': {
+          '& fieldset': { borderColor: '#e91e63' },
+            '&:hover fieldset': { borderColor: '#c2185b' }, 
+            '&.Mui-focused fieldset': { borderColor: '#e91e63' }, 
+          },
+        }}
+      />
 
           <Button type="submit" disabled={loading} variant="contained" sx={{
             backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
