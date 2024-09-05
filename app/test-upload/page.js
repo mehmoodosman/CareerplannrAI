@@ -43,7 +43,7 @@ export default function CareerPage() {
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Container maxWidth="sm" sx={{ textAlign: 'center', bgcolor: '#1e1e1e', borderRadius: '20px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.5)' }}>
         
-        {/* Logo with link to home */}
+        {/* Logo */}
         <Link href="/" passHref>
           <a>
             <Image 
@@ -75,7 +75,10 @@ export default function CareerPage() {
               bgcolor: '#2c2c2c',
               width: '100%',
               borderRadius: '8px',
-              input: { color: '#ffffff' },
+              color: '#ffffff',
+              '& .MuiInputBase-input': {
+                color: '#ffffff', 
+              },
               '& .MuiInputBase-input::placeholder': { color: '#ffffff' },
               '& .MuiOutlinedInput-root': {
                 '& fieldset': { borderColor: '#e91e63' },
