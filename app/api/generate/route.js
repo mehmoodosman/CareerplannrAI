@@ -18,22 +18,33 @@ You should return in the following JSON format:
     }
   ]
 }
+Respond with JSON only. Never include any extra characters,  non-whitespace characters, comments, or explanations.
 `;
 
-export async function POST(req){
-    const openai = new OpenAI(process.env.OPENAI_API_KEY)
-    const data = await req.text()
+export async function POST(req) {
+  const openai = new OpenAI({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      baseURL: "https://openrouter.ai/api/v1",
+  });
 
-    const completion = await openai.chat.completions.create({
-        messages: [
-            {role: "system", content: systemPrompt},
-            {role: "user", content: data}
-        ],
-        model: "openai/gpt-3.5-turbo",
-        response_format: {type: 'json_object'},
-    })
-    
-    const flashcards = JSON.parse(completion.choices[0].message.content)
+  try {
+      const data = await req.text();
 
-    return NextResponse.json(flashcards.flashcards)
+      const completion = await openai.chat.completions.create({
+          messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: data },
+          ],
+          model: 'openai/gpt-3.5-turbo',
+      });
+
+const flashcards = JSON.parse(completion.choices[0].message.content);
+
+return NextResponse.json(flashcards.flashcards);
+
+} catch (error) {
+console.error("Error during API request:", error.message);
+console.error("Stack trace:", error.stack);
+return NextResponse.json({ error: "An error occurred while processing your request." }, { status: 500 });
+}
 }
