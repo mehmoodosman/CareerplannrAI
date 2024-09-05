@@ -45,15 +45,15 @@ export default function CareerPage() {
         
         {/* Logo */}
         <Link href="/" passHref>
-          <a>
-            <Image 
-              src="/CareerSwipe.svg"
-              alt="CareerSwipe Logo"
-              width={100}
-              height={100}
-              style={{ objectFit: 'contain', cursor: 'pointer', marginBottom: '20px' }}
-            />
-          </a>
+
+          <Image 
+            src="/CareerSwipe.svg"
+            alt="CareerSwipe Logo"
+            width={100}
+            height={100}
+            style={{ objectFit: 'contain', cursor: 'pointer', marginBottom: '20px' }}
+          />
+
         </Link>
 
         <Typography variant="h3" gutterBottom sx={{
