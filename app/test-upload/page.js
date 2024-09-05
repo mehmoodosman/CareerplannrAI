@@ -122,8 +122,13 @@ export default function CareerPage() {
               <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
                 Description: {careerPath.description}
               </Typography>
+
+            </Box>
               <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
                 Overview: {careerPath.overview}
+              </Typography>
+              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+                DISPLAY THIS FOR PREMIUM USERS ONLY
               </Typography>
               <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
                 Responsibilities: {careerPath.responsibilities}
@@ -140,6 +145,8 @@ export default function CareerPage() {
               <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
                 Weaknesses: {careerPath.weaknesses}
               </Typography>
+            <Box>
+
             </Box>
           </Box>
         )}
