@@ -2,15 +2,43 @@
 
 import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar, Box, IconButton } from '@mui/material';
 import Link from 'next/link';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; // Assuming you're using Clerk for auth
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Analytics } from "@vercel/analytics/react"
 import Image from 'next/image'
+import getStripe from "@/utils/get-stripe";
+import Head from 'next/head'
 
 import { useState, useEffect } from 'react';
 
 
-export default function HomePage() {
+export default function Home() {
+  
+  const handleSubmit = async () => {
+    const checkoutSession = await fetch('/api/checkout_session', {
+      method: 'POST',
+      headers: {
+        origin: 'http://localhost:3000',
+      },
+    })
+
+    const checkoutSessionJson = await checkoutSession.json()
+
+    if (checkoutSession.statusCode === 500) {
+      console.error(checkoutSession.message)
+      return
+    }
+
+    const stripe = await getStripe()
+    const {error} = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id
+    })
+
+    if (error) {
+      console.warn(error.message)
+    }
+  }
+  
 
   //////////////////////////////////////////////////////
   // THIS IS TO TEST RESUME PDF TO JSON CONVERSION
@@ -322,15 +350,15 @@ export default function HomePage() {
             >
               <CardContent>
                 <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#e91e63' }}>
-                  Basic Plan
+                  Standard Plan
                 </Typography>
                 <Typography variant="h6" gutterBottom>
-                  $5 / month
+                  $10 / month
                 </Typography>
                 <Typography variant="body1" paragraph>
                   Access to basic features and career recommendations.
                 </Typography>
-                <Button variant="contained" sx={{
+                <Button variant="contained" onClick={handleSubmit} sx={{
                   backgroundColor: '#e91e63', color: 'white', borderRadius: '25px',
                   padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.3)',
                   ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)' }
@@ -364,7 +392,7 @@ export default function HomePage() {
                 <Typography variant="body1" paragraph>
                   Unlock advanced features and personalized recommendations.
                 </Typography>
-                <Button variant="contained" sx={{
+                <Button variant="contained" onClick={handleSubmit} sx={{
                   backgroundColor: '#e91e63', color: 'white', borderRadius: '25px',
                   padding: '10px 20px', boxShadow: '0 4px 15px rgba(233, 30, 99, 0.3)',
                   ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)' }
