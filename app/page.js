@@ -1,12 +1,12 @@
-'use client'
+'use client';
 import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar, Box, IconButton } from '@mui/material';
 import Link from 'next/link';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; 
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { Analytics } from "@vercel/analytics/react"
-import Image from 'next/image'
+import { Analytics } from "@vercel/analytics/react";
+import Image from 'next/image';
 import getStripe from "@/utils/get-stripe";
-import Head from 'next/head'
+import Head from 'next/head';
 
 export default function Home() {
   
@@ -26,7 +26,7 @@ export default function Home() {
     }
 
     const stripe = await getStripe()
-    const {error} = await stripe.redirectToCheckout({
+    const { error } = await stripe.redirectToCheckout({
       sessionId: checkoutSessionJson.id
     })
 
@@ -39,18 +39,22 @@ export default function Home() {
     <>
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
 
-
       {/* Navbar */}
       <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
-            <Image 
-              src="/CareerSwipe.svg"  
-              alt="CareerSwipe Logo"
-              width={100}  
-              height={100}
-              sx={{ objectFit: 'contain' }}
-            />
+            {/* Logo wrapped in Link */}
+            <Link href="/" passHref>
+              <a>
+                <Image 
+                  src="/CareerSwipe.svg"  
+                  alt="CareerSwipe Logo"
+                  width={100}  
+                  height={100}
+                  style={{ objectFit: 'contain', cursor: 'pointer' }}
+                />
+              </a>
+            </Link>
           </Box>
 
           {/* User buttons on the right end */}
