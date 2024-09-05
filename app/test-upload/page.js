@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 import { Box, Button, Container, Typography, TextField, CircularProgress } from '@mui/material';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function CareerPage() {
   const [resume, setResume] = useState('');
@@ -40,40 +42,66 @@ export default function CareerPage() {
   return (
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Container maxWidth="sm" sx={{ textAlign: 'center', bgcolor: '#1e1e1e', borderRadius: '20px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.5)' }}>
+        
+        {/* Logo with link to home */}
+        <Link href="/" passHref>
+          <a>
+            <Image 
+              src="/CareerSwipe.svg"
+              alt="CareerSwipe Logo"
+              width={100}
+              height={100}
+              style={{ objectFit: 'contain', cursor: 'pointer', marginBottom: '20px' }}
+            />
+          </a>
+        </Link>
+
         <Typography variant="h3" gutterBottom sx={{
           fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
           textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
         }}>
           Career Recommendation
         </Typography>
-        
-        <form>
-        <TextField
-        value={resume}
-        onChange={(e) => setResume(e.target.value)}
-        placeholder="Paste resume text here"
-        multiline
-        rows={8}
-        variant="outlined"
-        sx={{
-        bgcolor: '#2c2c2c',
-        width: '100%',
-        borderRadius: '8px',
-        input: { color: '#ffffff' }, 
-        '& .MuiInputBase-input::placeholder': { color: '#ffffff' }, 
-          '& .MuiOutlinedInput-root': {
-          '& fieldset': { borderColor: '#e91e63' },
-            '&:hover fieldset': { borderColor: '#c2185b' }, 
-            '&.Mui-focused fieldset': { borderColor: '#e91e63' }, 
-          },
-        }}
-      />
 
-          <Button type="submit" disabled={loading} variant="contained" sx={{
-            backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
-            padding: '10px 40px', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
-            ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
-          }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+          <TextField
+            value={resume}
+            onChange={(e) => setResume(e.target.value)}
+            placeholder="Paste resume text here"
+            multiline
+            rows={8}
+            variant="outlined"
+            sx={{
+              bgcolor: '#2c2c2c',
+              width: '100%',
+              borderRadius: '8px',
+              input: { color: '#ffffff' },
+              '& .MuiInputBase-input::placeholder': { color: '#ffffff' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': { borderColor: '#e91e63' },
+                '&:hover fieldset': { borderColor: '#c2185b' },
+                '&.Mui-focused fieldset': { borderColor: '#e91e63' },
+              },
+            }}
+          />
+
+          {/* Button with margin */}
+          <Button 
+            type="submit" 
+            disabled={loading} 
+            variant="contained" 
+            sx={{
+              backgroundColor: '#e91e63', 
+              color: 'white', 
+              textTransform: 'none', 
+              fontWeight: 'bold', 
+              borderRadius: '25px',
+              padding: '10px 40px', 
+              marginTop: '20px',
+              boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+              ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
+            }}
+          >
             {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : 'Get Recommendation'}
           </Button>
         </form>
