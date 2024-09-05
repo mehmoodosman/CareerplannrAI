@@ -47,16 +47,23 @@ export default function CareerPage() {
           Career Recommendation
         </Typography>
         
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-          <TextField
-            value={resume}
-            onChange={(e) => setResume(e.target.value)}
-            placeholder="Paste resume text here"
-            multiline
-            rows={8}
-            variant="outlined"
-            sx={{ bgcolor: '#2c2c2c', color: '#ffffff', input: { color: '#ffffff' }, width: '100%', borderRadius: '8px' }}
+        <form>
+        <TextField
+        value={resume}
+        onChange={(e) => setResume(e.target.value)}
+        placeholder="Paste resume text here"
+        multiline
+        rows={8}
+        variant="outlined"
+        sx={{
+          bgcolor: '#2c2c2c',
+          width: '100%',
+          borderRadius: '8px',
+          input: { color: '#ffffff' },
+          '& .MuiInputBase-input::placeholder': { color: '#ffffff' },
+            }}
           />
+
           <Button type="submit" disabled={loading} variant="contained" sx={{
             backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
             padding: '10px 40px', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
@@ -67,7 +74,6 @@ export default function CareerPage() {
         </form>
 
         {error && <Typography sx={{ color: 'red', marginTop: 2 }}>{error}</Typography>}
-
 
         {careerPath && (
           <Box sx={{ textAlign: 'center', marginTop: 4, bgcolor: '#2c2c2c', padding: 3, borderRadius: '12px', boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)' }}>
@@ -82,4 +88,3 @@ export default function CareerPage() {
     </Box>
   );
 }
-
