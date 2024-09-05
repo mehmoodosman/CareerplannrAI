@@ -103,7 +103,7 @@ export default function Home() {
           fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
           textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
         }}>
-          Welcome to Careerplannr AI
+          Welcome to CareerSwipe AI
         </Typography>
         <Typography variant="h5" color="textSecondary" gutterBottom sx={{
           fontFamily: 'Roboto, sans-serif', color: '#bbbbbb',
@@ -127,7 +127,7 @@ export default function Home() {
         }}>
           Start Your Career Exploration
         </Button> */}
-        <Link href="/test-upload" passHref>
+        <Link href="/generate" passHref>
       <Button variant="contained" size="large" sx={{
         backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
         padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',

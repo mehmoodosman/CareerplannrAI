@@ -5,7 +5,7 @@ import {ClerkProvider, SignedIn, SignedOut, SignInButton, SignOutButton,UserButt
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Career Plannr AI",
+  title: "CareerSwipe AI",
   description: "Swipe-able, intuitive career path recommendations.",
 };
 
