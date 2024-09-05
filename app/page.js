@@ -91,13 +91,22 @@ export default function HomePage() {
             marginTop: 4, marginBottom: 4, transition: 'transform 0.5s', ':hover': { transform: 'scale(1.05)' }
           }}
         />
-        <Button variant="contained" size="large" sx={{
+        {/* <Button variant="contained" size="large" sx={{
           backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
           padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
           ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
         }}>
           Start Your Career Exploration
-        </Button>
+        </Button> */}
+        <Link href="/test-upload" passHref>
+      <Button variant="contained" size="large" sx={{
+        backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
+        padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+        ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
+      }}>
+        Start Your Career Exploration
+      </Button>
+    </Link>
       </Container>
 
 
