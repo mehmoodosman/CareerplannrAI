@@ -1,5 +1,6 @@
-"use client";
+'use client';
 import { useState } from 'react';
+import { Box, Button, Container, Typography, TextField, CircularProgress } from '@mui/material';
 
 export default function CareerPage() {
   const [resume, setResume] = useState('');
@@ -26,8 +27,8 @@ export default function CareerPage() {
       }
 
       const data = await response.json();
-      console.log('API response:', data); 
-      setCareerPath(data.careerpath[0]); 
+      console.log('API response:', data);
+      setCareerPath(data.careerpath[0]);
 
     } catch (error) {
       setError(error.message);
@@ -37,33 +38,48 @@ export default function CareerPage() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '20px' }}>
-      <h1>Career Recommendation</h1>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <textarea
-          value={resume}
-          onChange={(e) => setResume(e.target.value)}
-          placeholder="Paste resume text here"
-          rows="10"
-          cols="50"
-          style={{ marginBottom: '10px' }}
-        />
-        <button type="submit" disabled={loading} style={{ padding: '10px 20px' }}>
-          {loading ? 'Processing...' : 'Get Recommendation'}
-        </button>
-      </form>
+    <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Container maxWidth="sm" sx={{ textAlign: 'center', bgcolor: '#1e1e1e', borderRadius: '20px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.5)' }}>
+        <Typography variant="h3" gutterBottom sx={{
+          fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
+          textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
+        }}>
+          Career Recommendation
+        </Typography>
+        
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+          <TextField
+            value={resume}
+            onChange={(e) => setResume(e.target.value)}
+            placeholder="Paste resume text here"
+            multiline
+            rows={8}
+            variant="outlined"
+            sx={{ bgcolor: '#2c2c2c', color: '#ffffff', input: { color: '#ffffff' }, width: '100%', borderRadius: '8px' }}
+          />
+          <Button type="submit" disabled={loading} variant="contained" sx={{
+            backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '25px',
+            padding: '10px 40px', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+            ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
+          }}>
+            {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : 'Get Recommendation'}
+          </Button>
+        </form>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <Typography sx={{ color: 'red', marginTop: 2 }}>{error}</Typography>}
 
-      {careerPath && (
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <h2>Recommended Career Path</h2>
-          <h3>Title: {careerPath.title}</h3>
-          <p>Description: {careerPath.description}</p>
-        </div>
-      )}
-    </div>
+
+        {careerPath && (
+          <Box sx={{ textAlign: 'center', marginTop: 4, bgcolor: '#2c2c2c', padding: 3, borderRadius: '12px', boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)' }}>
+            <Typography variant="h5" fontWeight="bold" sx={{ color: '#e91e63' }}>
+              Recommended Career Path
+            </Typography>
+            <Typography variant="h6" sx={{ marginTop: 2, color: '#ffffff' }}>Title: {careerPath.title}</Typography>
+            <Typography sx={{ color: '#bbbbbb' }}>Description: {careerPath.description}</Typography>
+          </Box>
+        )}
+      </Container>
+    </Box>
   );
 }
-
 
