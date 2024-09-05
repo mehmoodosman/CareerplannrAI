@@ -1,3 +1,5 @@
+'use client'
+
 import { Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar, Box, IconButton } from '@mui/material';
 import Link from 'next/link';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'; // Assuming you're using Clerk for auth
@@ -5,7 +7,89 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import { Analytics } from "@vercel/analytics/react"
 import Image from 'next/image'
 
+import { useState, useEffect } from 'react';
+
+
 export default function HomePage() {
+
+  //////////////////////////////////////////////////////
+  // THIS IS TO TEST RESUME PDF TO JSON CONVERSION
+  /////////////   CODE START HERE    //////////////////
+  const [filepath, setFilepath] = useState('app/api/loader/YasinEhsan.pdf');  // Replace this with the path of the file
+  const [loadedData, setLoadedData] = useState('');
+  const [parsedData, setParsedData] = useState('')
+
+  const startTime = new Date();
+  console.log('Timer starts now...')
+
+  // LOADER: convert pdf to a string
+  useEffect(() => {
+    
+    const loadPDF = async () => {
+      try{
+        const response = await fetch(`/api/loader`, {
+          method: "POST",
+          body: JSON.stringify({ 
+            filepath: filepath }),
+        })
+
+        // Check if the response is okay
+        if (!response.ok) {
+          throw new Error(`Error fetching file`);
+        }
+
+        // Return a Document object from the response
+        // Sample Document output: [{pageContent: "contents of the resume",
+        //   metadata: {loc: {}, pdf: {}, source: "resume.pdf", pageNumber: 1} }]
+        const data = await response.json();
+
+        setLoadedData(data);
+        return data;
+      
+      } catch(error) {
+        console.error('Error fetching file:', error);
+        return;
+      }
+    }
+
+    loadPDF()
+
+  }, [])
+
+
+  // PARSER: Convert loaded data to JSON format
+  useEffect(() => {
+    if (!loadedData) return;  // Don't try to parse if there's no data
+
+    const parseToJSON = async () => {
+      try {
+        const response = await fetch('/api/parser', {
+          method: 'POST',
+          body: JSON.stringify(loadedData),  // Ensure the loadedData is in a suitable format
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to generate JSON');
+        }
+
+        const parsedData = await response.json();
+        setParsedData(parsedData);
+      } catch (error) {
+        console.error('Error generating JSON:', error);
+      } finally {
+        const timeElapsed = (new Date() - startTime) / 1000.0
+        console.log (`Total time elapsed is ${timeElapsed} seconds`)
+      }
+    };
+
+    parseToJSON();
+  }, [loadedData]);  // Trigger parseToJSON whenever loadedData changes
+
+    /////////////   CODE ENDS HERE    //////////////////
+
   return (
     <>
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
@@ -91,22 +175,22 @@ export default function HomePage() {
             marginTop: 4, marginBottom: 4, transition: 'transform 0.5s', ':hover': { transform: 'scale(1.05)' }
           }}
         />
-        {/* <Button variant="contained" size="large" sx={{
-          backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
-          padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
-          ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
-        }}>
-          Start Your Career Exploration
-        </Button> */}
-        <Link href="/test-upload" passHref>
-      <Button variant="contained" size="large" sx={{
-        backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
-        padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
-        ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
-      }}>
-        Start Your Career Exploration
-      </Button>
-    </Link>
+            {/* <Button variant="contained" size="large" sx={{
+            backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
+            padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+            ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
+          }}>
+            Start Your Career Exploration
+          </Button> */}
+          <Link href="/test-upload" passHref>
+            <Button variant="contained" size="large" sx={{
+              backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
+              padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+              ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
+            }}>
+              Start Your Career Exploration
+            </Button>
+        </Link>
       </Container>
 
 
