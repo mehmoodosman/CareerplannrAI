@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Box, Button, Container, Typography, TextField, CircularProgress } from '@mui/material';
+import SummarizeIcon from '@mui/icons-material/Summarize';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -113,11 +114,33 @@ export default function CareerPage() {
 
         {careerPath && (
           <Box sx={{ textAlign: 'center', marginTop: 4, bgcolor: '#2c2c2c', padding: 3, borderRadius: '12px', boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)' }}>
-            <Typography variant="h5" fontWeight="bold" sx={{ color: '#e91e63' }}>
+            <Typography variant="h5" fontWeight="bold" sx={{ color: '#e91e63' }} gutterBottom>
               Recommended Career Path
             </Typography>
             <Typography variant="h6" sx={{ marginTop: 2, color: '#ffffff' }}>Title: {careerPath.title}</Typography>
-            <Typography sx={{ color: '#bbbbbb' }}>Description: {careerPath.description}</Typography>
+            <Box sx={{ textAlign: 'left'}}>
+              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+                Description: {careerPath.description}
+              </Typography>
+              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+                Overview: {careerPath.overview}
+              </Typography>
+              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+                Responsibilities: {careerPath.responsibilities}
+              </Typography>
+              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+                Skills: {careerPath.skills}
+              </Typography>
+              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+                Outlook: {careerPath.outlook}
+              </Typography>
+              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+                Strength: {careerPath.strengths}
+              </Typography>
+              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+                Weaknesses: {careerPath.weaknesses}
+              </Typography>
+            </Box>
           </Box>
         )}
       </Container>
