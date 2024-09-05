@@ -35,12 +35,12 @@ export async function POST(req) {
 
 
 /* Start ================================================================================================================= 
-    Add this function to the request handler (client side) and
+    Add this function to the request handler (client side)
 -----------------------------------------------------------------
 
-const [filepath, setFilepath] = useState('app/api/loader/YasinEhsan.pdf');  // Replase this with the filepath
+const [filepath, setFilepath] = useState('app/api/loader/YasinEhsan.pdf');  // Replace this with the path of the file
 
-const getFiles = async () => {
+const loadPDF = async () => {
       try{
         const response = await fetch(`/api/loader`, {
           method: "POST",
