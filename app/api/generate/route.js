@@ -18,10 +18,14 @@ You should return in the following JSON format:
     }
   ]
 }
-`
+`;
 
 export async function POST(req){
-    const openai = new OpenAI(process.env.OPENAI_API_KEY)
+    const openai = new OpenAI({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      baseURL: "https://openrouter.ai/api/v1",
+    });
+
     const data = await req.text()
 
     const completion = await openai.chat.completions.create({
@@ -29,11 +33,11 @@ export async function POST(req){
             {role: "system", content: systemPrompt},
             {role: "user", content: data}
         ],
-        model: "gpt-4o-mini",
+        model: "openai/gpt-3.5-turbo",
         response_format: {type: 'json_object'},
-    })
+    });
     
-    const flashcards = JSON.parse(completion.choices[0].message.content)
+    const flashcards = JSON.parse(completion.choices[0].message.content);
 
-    return NextResponse.json(flashcards.flashcards)
+    return NextResponse.json(flashcards.flashcards);
 }
