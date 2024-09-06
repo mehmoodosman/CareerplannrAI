@@ -46,6 +46,7 @@ export default function CareerPage() {
       });
 
       if (!response.ok) {
+        console.error('Network error: ' + response)
         throw new Error('Network response was not ok');
       }
 
@@ -101,7 +102,7 @@ export default function CareerPage() {
 
   return (
     <>
-    <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 4 }}>
       <Container maxWidth="sm" sx={{ textAlign: 'center', bgcolor: '#1e1e1e', borderRadius: '20px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.5)' }}>
         
         {/* Logo */}
@@ -115,7 +116,7 @@ export default function CareerPage() {
           />
         </Link>
 
-        <Typography variant="h3" gutterBottom sx={{
+        <Typography variant="h3" sx={{
           fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
           textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
         }}>
@@ -193,13 +194,14 @@ export default function CareerPage() {
             <Typography variant="h5" fontWeight="bold" sx={{ color: '#e91e63' }} gutterBottom>
               Recommended Career Path
             </Typography>
-            <Typography variant="h6" sx={{ marginTop: 2, color: '#ffffff' }}>Title: {careerPath.title}</Typography>
-            <Box sx={{ textAlign: 'left', paddingBottom: 2}}>
+            <Typography variant="subtitle" sx={{ color: '#e91e63' }} gutterBottom> for {careerPath.name}</Typography>
+            <Typography variant="h6" sx={{ marginTop: 4, color: '#ffffff' }}>Title: {careerPath.title}</Typography>
+            <Box sx={{ textAlign: 'left', paddingBottom: 2,}}>
               <Typography sx={{ color: '#bbbbbb', textAlign: 'center', marginBottom: 4, marginX: 4 }} gutterBottom>
                 {careerPath.description}
               </Typography>
               <Stack direction='row' >
-                <HandymanIcon sx={{ color: '#fff' }} />
+                <HandymanIcon sx={{ color: '#bbb' }} />
                 <Typography sx={{ color: '#bbbbbb', paddingLeft: 2}} gutterBottom> 
                   {careerPath.skills}
                 </Typography>
@@ -211,7 +213,7 @@ export default function CareerPage() {
                 </Typography>
               </Stack>
               <Stack direction='row' >
-                <BoltIcon sx={{ color: '#fff' }} />
+                <BoltIcon sx={{ color: '#bbb' }} />
                 <Typography sx={{ color: '#bbbbbb', paddingLeft: 2}} gutterBottom> 
                   {careerPath.strengths}
                 </Typography>

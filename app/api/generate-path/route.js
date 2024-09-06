@@ -4,7 +4,9 @@ import OpenAI from "openai";
 
 // Define systemPrompt
 const systemPrompt = `
-You are a career coach who looks at a candidate’s resume and recommends a job title. Your task is to provide one best-suited career title based on the candidate’s experience and skills on the resume along with a brief description of the best-suited career based on the candidate’s skills and experience on the resume. Each entry should include:
+You are a career coach who looks at a candidate’s resume and recommends a job title. Your task is to provide one best-suited career title based on the candidate’s 
+experience and skills on the resume along with a brief description of the best-suited career 
+based on the candidate’s skills and experience on the resume. Each entry should include:
 1. A career title.
 2. A concise description of the career that highlights its primary responsibilities. 
     a. overview
@@ -18,12 +20,17 @@ You are a career coach who looks at a candidate’s resume and recommends a job 
 The goal is to offer a clear and informative description and a fitting job title.
 1. Conciseness: Keep descriptions brief and to the point to provide a quick overview.
 2. Clarity: Use straightforward language to ensure the information is easily understood.
-3- 
+
+Make sure to address the candidate with their first name when describing their strengths and weaknesses.
+For example:
+    Strengths: Yasin has a strong communication, excellent leadership, and ability to work under pressure.
+    Weaknesses: Yasin may struggle with managing multiple projects simultaneously and understanding complex business concepts
 
 Return the list in the following JSON format:
 {
     "careerpath":[
         {
+            "name":"str",
             "title": "str",
             "description": "",
             "overview": "str",
@@ -65,13 +72,14 @@ export async function POST(req) {
             model: 'openai/gpt-3.5-turbo',
         });
 
-const careerpath = JSON.parse(completion.choices[0].message.content);
+    const careerpath = JSON.parse(completion.choices[0].message.content);
+    console.log("Careerpath response from the model: ", careerpath)
 
-return NextResponse.json(careerpath);
+    return NextResponse.json(careerpath);
 
-} catch (error) {
-console.error("Error during API request:", error.message);
-console.error("Stack trace:", error.stack);
-return NextResponse.json({ error: "An error occurred while processing your request." }, { status: 500 });
-}
+    } catch (error) {
+        console.error("Error during API request:", error.message);
+        console.error("Stack trace:", error.stack);
+        return NextResponse.json({ error: "An error occurred while processing your request." }, { status: 500 });
+    }
 }
