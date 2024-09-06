@@ -5,7 +5,7 @@ import {ClerkProvider, SignedIn, SignedOut, SignInButton, SignOutButton,UserButt
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Career Plannr AI",
+  title: "CareerSwipe AI",
   description: "Swipe-able, intuitive career path recommendations.",
 };
 
@@ -13,7 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <body className={inter.className} style={{ backgroundColor: '#121212' }}>
+      {children}
+    </body>
     </html>
     </ClerkProvider>
   );

@@ -5,7 +5,7 @@ import { useUser } from "@clerk/nextjs"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material"
-
+import Footer from "@/components/Footer";
 export default function Generate() {
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([]) 
@@ -224,6 +224,7 @@ export default function Generate() {
             </DialogActions>
         </Dialog>    
     </Container>
+    < Footer />
     </Box>
     )
 }

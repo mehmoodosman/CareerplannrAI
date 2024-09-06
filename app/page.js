@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Image from 'next/image';
 import getStripe from "@/utils/get-stripe";
 import Head from 'next/head';
+import Footer from "@/components/Footer";
 
 export default function Home() {
   
@@ -336,26 +337,8 @@ export default function Home() {
 
 
     {/* Footer */}
-    <Box sx={{
-      bgcolor: '#1e1e1e', padding: 3, borderTop: '4px solid #e91e63', position: 'relative', bottom: 0, width: '100%',
-    }}>
-      <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
-        <Typography variant="body1" color="" sx={{ marginBottom: 2 }}>
-          © {new Date().getFullYear()} Careerplannr AI. All rights reserved.
-        </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-          <IconButton component="a" href="https://github.com/mehmoodosman" target="_blank" sx={{ color: '#ffffff' }}>
-            <GitHubIcon />
-          </IconButton>
-          <IconButton component="a" href="https://github.com/BarnabasNovak1" target="_blank" sx={{ color: '#ffffff' }}>
-            <GitHubIcon />
-          </IconButton>
-          <IconButton component="a" href="https://github.com/ayeshm3" target="_blank" sx={{ color: '#ffffff' }}>
-            <GitHubIcon />
-          </IconButton>
-        </Box>
-      </Container>
-    </Box>
+    <Footer />
+
   </Box>
   <Analytics/>
  </>;
