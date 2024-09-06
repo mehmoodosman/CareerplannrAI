@@ -1,12 +1,12 @@
 'use client'
-import { writeBatch, doc, collection, getDoc, setDoc } from "firebase/firestore"
+import { writeBatch, doc, collection, getDoc } from "firebase/firestore"
 import { db } from "@/firebase"
 import { useUser } from "@clerk/nextjs"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material"
 
-export default function Generate(){
+export default function Generate() {
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([]) 
     const [flipped, setFlipped] = useState([]) 
@@ -53,7 +53,7 @@ export default function Generate(){
     const handleClose = () => {
         setOpen(false)
     }
-    
+
     const saveFlashcards = async () => {
         if(!name) {
             alert('Please enter a name')
@@ -88,34 +88,57 @@ export default function Generate(){
     }
     
     return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
         <Box sx={{
-            mt:4, mb:6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+            mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
         }}>
-            <Typography variant="h4" gutterBottom>Generate Careercards</Typography>
-            <Paper sx={{p: 4, width: '100%'}}>
+            <Typography variant="h4" gutterBottom sx={{ color: '#ffffff', fontWeight: 'bold', textShadow: '0 0 10px #e91e63' }}>
+                Generate Careercards
+            </Typography>
+            <Paper sx={{ p: 4, width: '100%', bgcolor: '#2c2c2c', borderRadius: '8px' }}>
                 <TextField 
-                value={text} 
-                onChange={(e) => setText(e.target.value)} 
-                label = "Enter text" 
-                fullWidth
-                rows={4}
-                variant = "outlined"
-                sx={{mb: 2,}} 
+                    value={text} 
+                    onChange={(e) => setText(e.target.value)} 
+                    label="Enter text" 
+                    fullWidth
+                    rows={4}
+                    variant="outlined"
+                    sx={{ mb: 2, bgcolor: '#333', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                 />
-                <Button variant="contained" color="primary" onClick={handleSubmit} fullWidth>
+                <Button 
+                    variant="contained" 
+                    color="secondary" 
+                    onClick={handleSubmit} 
+                    fullWidth
+                    sx={{
+                        bgcolor: '#e91e63',
+                        color: '#ffffff',
+                        borderRadius: '4px',
+                        ':hover': { bgcolor: '#d81b60' },
+                        ':disabled': { bgcolor: '#b0bec5', color: '#ffffff' }
+                    }}
+                >
                     Submit
                 </Button>
             </Paper>
         </Box>
         
         {flashcards.length > 0 && (
-            <Box sx={{mt: 4}}>
-                <Typography variant="h5" gutterBottom>Careercards Preview</Typography>
-                <Grid container spacing = {3}>
+            <Box sx={{ mt: 4 }}>
+                <Typography variant="h5" gutterBottom sx={{ color: '#ffffff' }}>
+                    Careercards Preview
+                </Typography>
+                <Grid container spacing={3}>
                     {flashcards.map((flashcard, index) => (
-                        <Grid item xs= {12} sm={6} md={4} key = {index}>
-                            <Card>
+                        <Grid item xs={12} sm={6} md={4} key={index}>
+                            <Card sx={{
+                                bgcolor: '#2c2c2c',
+                                borderRadius: '15px',
+                                color: '#ffffff',
+                                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4)',
+                                transition: 'transform 0.3s, box-shadow 0.3s',
+                                ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.6)' }
+                            }}>
                                 <CardActionArea onClick={() => handleCardClick(index)}>
                                     <CardContent>
                                         <Box sx={{
@@ -126,8 +149,8 @@ export default function Generate(){
                                                 position: 'relative',
                                                 width: '100%',
                                                 height: '200px',
-                                                boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
-                                                transform: flipped[index]? 'rotateY(180deg)': 'rotateY(0deg)',
+                                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                                                transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
                                             },
                                             '& > div > div': {
                                                 position: 'absolute',
@@ -159,15 +182,27 @@ export default function Generate(){
                         </Grid>
                     ))}
                 </Grid>
-                <Box sx={{mt: 4, display: "flex", justifyContent: "center"}}>
-                    <Button variant="contained" color="secondary" onClick={handleOpen}> Save </Button>
+                <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+                    <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        onClick={handleOpen} 
+                        sx={{
+                            bgcolor: '#e91e63',
+                            color: '#ffffff',
+                            borderRadius: '4px',
+                            ':hover': { bgcolor: '#d81b60' }
+                        }}
+                    >
+                        Save
+                    </Button>
                 </Box>
             </Box>    
         )}
         <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Save Flashcards</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
+            <DialogTitle sx={{ bgcolor: '#333', color: '#ffffff' }}>Save Flashcards</DialogTitle>
+            <DialogContent sx={{ bgcolor: '#2c2c2c', color: '#ffffff' }}>
+                <DialogContentText sx={{ color: '#ffffff' }}>
                     Enter the name of your flashcards collection
                 </DialogContentText>
                 <TextField
@@ -179,13 +214,14 @@ export default function Generate(){
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     variant="outlined"
+                    sx={{ bgcolor: '#333', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                 />
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={saveFlashcards}>Save</Button>
+            <DialogActions sx={{ bgcolor: '#333' }}>
+                <Button onClick={handleClose} color="error">Cancel</Button>
+                <Button onClick={saveFlashcards} color="secondary">Save</Button>
             </DialogActions>
         </Dialog>    
     </Container>
-   )
+    )
 }
