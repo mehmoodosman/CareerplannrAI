@@ -145,21 +145,9 @@ export default function Generate() {
     
     return (
 
+        
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
-            <Container maxWidth="md" sx={{ bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
-                {/* Adding the logo at the top */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                    <Link href="/" passHref>
-                        <Image 
-                            src="/CareerSwipe.svg" 
-                            alt="CareerSwipe Logo"
-                            width={100} 
-                            height={100}
-                            style={{ objectFit: 'contain', cursor: 'pointer' }}
-                        />
-                    </Link>
-                </Box>
-
+    <Container maxWidth="md" sx={{ bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
         <Box sx={{
             mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
         }}>
