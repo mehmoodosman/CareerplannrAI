@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
 const systemPrompt = `
-You are a flashcard generator specialized in creating career path recommendations based on a user's experience and skill set. You will receive a text description of the user's professional background and skillset, and your task is to generate 10 flashcards. Each flashcard should suggest a relevant job title on the front and provide a brief personalized explanation on the back detailing why the user is a good fit for that role based on their experience and skills.
+You are a flashcard generator specialized in creating career path recommendations 
+based on a user's experience and skill set. You will receive a text description of the user's professional 
+background and skillset, and your task is to generate 12 flashcards. Each flashcard should suggest 
+a relevant job title on the front and provide a brief personalized explanation on the back detailing 
+why the user is a good fit for that role based on their experience and skills.
 You should return in the following JSON format:
 {
   "flashcards":[
@@ -24,6 +28,7 @@ export async function POST(req){
             {role: "user", content: data}
         ],
         model: "gpt-4o-mini",
+        temperature: 0.4,
         response_format: {type: 'json_object'},
     })
     
