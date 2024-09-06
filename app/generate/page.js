@@ -94,12 +94,10 @@ export default function Generate() {
 
     return (
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
-  
             {/* Navbar */}
             <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
                 <Toolbar>
                     <Box sx={{ flexGrow: 1 }}>
-                        {/* Logo wrapped in Link */}
                         <Link href="/" passHref>
                             <Image 
                                 src="/CareerSwipe.svg"  
@@ -110,7 +108,6 @@ export default function Generate() {
                             />
                         </Link>
                     </Box>
-
                     <Typography variant="h4" gutterBottom sx={{
                         color: 'white',
                         fontWeight: 'bold',
@@ -236,12 +233,13 @@ export default function Generate() {
                     <DialogTitle sx={{ color: '#ffffff' }}>Save Flashcards</DialogTitle>
                     <DialogContent>
                         <DialogContentText sx={{ color: '#ffffff' }}>
-                            Enter the name of your flashcards collection.
+                            Enter a name for your flashcard set:
                         </DialogContentText>
                         <TextField
                             autoFocus
                             margin="dense"
-                            label="Collection Name"
+                            id="name"
+                            label="Flashcard Set Name"
                             type="text"
                             fullWidth
                             variant="outlined"
@@ -251,12 +249,15 @@ export default function Generate() {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose} sx={{ color: '#e91e63' }}>Cancel</Button>
-                        <Button onClick={saveFlashcards} sx={{ bgcolor: '#e91e63', color: '#ffffff', ':hover': { bgcolor: '#d81b60' } }}>Save</Button>
+                        <Button onClick={handleClose} sx={{ color: '#ffffff' }}>
+                            Cancel
+                        </Button>
+                        <Button onClick={saveFlashcards} sx={{ bgcolor: '#e91e63', color: '#ffffff', ':hover': { bgcolor: '#d81b60' } }}>
+                            Save
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </Container>
         </Box>
     )
 }
-
