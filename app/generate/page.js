@@ -21,8 +21,22 @@ export default function Generate(){
             body: JSON.stringify({ text }),
             headers: { 'Content-Type': 'application/json' },
         })
-        .then((res) => res.json())
-        .then((data) => setFlashcards(data))    
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return res.text();  // Use .text() instead of .json() to safely handle any empty response
+        })
+        .then((text) => {
+            if (text) {
+                return JSON.parse(text);  // Parse the text if it's not empty
+            }
+            return {};  // Handle the case where the response body is empty
+        })
+        .then((data) => setFlashcards(data))
+        .catch((error) => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
     }
 
     const handleCardClick = (id) => {
