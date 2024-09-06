@@ -1,92 +1,113 @@
 'use client'
-import { writeBatch, doc, collection, getDoc, setDoc } from "firebase/firestore"
-import { db } from "@/firebase"
-import { useUser } from "@clerk/nextjs"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material"
+import { writeBatch, doc, collection, getDoc, setDoc } from "firebase/firestore";
+import { db } from "@/firebase";
+import { useUser } from "@clerk/nextjs";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+    Container,
+    Box,
+    Typography,
+    Paper,
+    TextField,
+    Button,
+    Card,
+    CardActionArea,
+    CardContent,
+    Grid,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    DialogContentText
+} from "@mui/material";
 
-export default function Generate(){
-    const { isLoaded, isSignedIn, user } = useUser()
-    const [flashcards, setFlashcards] = useState([]) 
-    const [flipped, setFlipped] = useState([]) 
-    const [text, setText] = useState('') 
-    const [name, setName] = useState('') 
-    const [open, setOpen] = useState(false) 
-    const router = useRouter()
+export default function Generate() {
+    const { isLoaded, isSignedIn, user } = useUser();
+    const [flashcards, setFlashcards] = useState([]);
+    const [flipped, setFlipped] = useState([]);
+    const [text, setText] = useState('');
+    const [name, setName] = useState('');
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const handleSubmit = async () => {
-        fetch('/api/generate', {
-            method: 'POST',
-            body: JSON.stringify({ text }),
-            headers: { 'Content-Type': 'application/json' },
-        })
-        .then((res) => {
+        setLoading(true);
+        try {
+            const res = await fetch('/api/generate', {
+                method: 'POST',
+                body: JSON.stringify({ text }),
+                headers: { 'Content-Type': 'application/json' },
+            });
+
             if (!res.ok) {
                 throw new Error('Network response was not ok');
             }
-            return res.text();  // Use .text() instead of .json() to safely handle any empty response
-        })
-        .then((text) => {
-            if (text) {
-                return JSON.parse(text);  // Parse the text if it's not empty
-            }
-            return {};  // Handle the case where the response body is empty
-        })
-        .then((data) => setFlashcards(data))
-        .catch((error) => {
+            const responseText = await res.text();  // Use .text() to handle any empty response
+
+            const data = responseText ? JSON.parse(responseText) : [];
+            setFlashcards(data);
+        } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
-        });
+        } finally {
+            setLoading(false); // Set loading state to false after fetching
+        }
     }
 
     const handleCardClick = (id) => {
-        setFlipped((prev) => ({
+        setFlipped(prev => ({
             ...prev,
             [id]: !prev[id],
-        }))
+        }));
     }
 
     const handleOpen = () => {
-        setOpen(true)
+        setOpen(true);
     }
 
     const handleClose = () => {
-        setOpen(false)
+        setOpen(false);
     }
-    
-    const saveFlashcards = async () => {
-        if(!name) {
-            alert('Please enter a name')
-            return 
-        }
-        const batch = writeBatch(db)
-        const userDocRef = doc(collection(db, 'users'), user.id)
-        const docSnap = await getDoc(userDocRef)
 
-        if(docSnap.exists()){
-            const collections = docSnap.data().flashcards || []
-            if (collections.find((f) => f.name === name)){
-                alert('Flashcard collection with the same name already exists')
-                return
+    const saveFlashcards = async () => {
+        if (!name) {
+            alert('Please enter a name');
+            return;
+        }
+        const batch = writeBatch(db);
+        const userDocRef = doc(collection(db, 'users'), user.id);
+        const docSnap = await getDoc(userDocRef);
+
+        if (docSnap.exists()) {
+            const collections = docSnap.data().flashcards || [];
+            if (collections.find((f) => f.name === name)) {
+                alert('Flashcard collection with the same name already exists');
+                return;
             } else {
-                collections.push({name})
-                batch.set(userDocRef, {flashcards: collections}, {merge: true})
+                collections.push({ name });
+                batch.set(userDocRef, { flashcards: collections }, { merge: true });
             }
         } else {
-            batch.set(userDocRef, {flashcards: [{name}]})
+            batch.set(userDocRef, { flashcards: [{ name }] });
         }
 
-        const colRef = collection(userDocRef, name)
+        const colRef = collection(userDocRef, name);
         flashcards.forEach((flashcard) => {
-            const cardDocRef = doc(colRef)
-            batch.set(cardDocRef, flashcard)
-        })
+            const cardDocRef = doc(colRef);
+            batch.set(cardDocRef, flashcard);
+        });
 
-        await batch.commit()
-        handleClose()
-        router.push('/flashcards')
+        try {
+            await batch.commit();
+            handleClose();
+            router.push('/flashcards');
+        } catch (error) {
+            console.error('Error saving flashcards:', error);
+            alert('There was an error saving the flashcards.');
+        }
     }
-    
+
     return (
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
             {/* Navbar */}
@@ -94,10 +115,10 @@ export default function Generate(){
                 <Toolbar>
                     <Box sx={{ flexGrow: 1 }}>
                         <Link href="/" passHref>
-                            <Image 
-                                src="/CareerSwipe.svg"  
+                            <Image
+                                src="/CareerSwipe.svg"
                                 alt="CareerSwipe Logo"
-                                width={100}  
+                                width={100}
                                 height={100}
                                 style={{ objectFit: 'contain', cursor: 'pointer' }}
                             />
@@ -118,27 +139,27 @@ export default function Generate(){
             <Container>
                 <Box sx={{ mb: 6 }}>
                     <Paper sx={{ p: 4, bgcolor: '#2c2c2c', borderRadius: '8px' }}>
-                        <TextField 
-                            value={text} 
-                            onChange={(e) => setText(e.target.value)} 
-                            label="Enter text" 
+                        <TextField
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                            label="Enter text"
                             fullWidth
                             rows={4}
                             variant="outlined"
                             sx={{ mb: 2, bgcolor: '#333', borderRadius: '4px', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
-                        <Button 
-                            variant="contained" 
-                            color="secondary" 
-                            onClick={handleSubmit} 
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleSubmit}
                             fullWidth
                             sx={{
-                                bgcolor: '#e91e63', 
-                                color: '#ffffff', 
-                                borderRadius: '4px', 
+                                bgcolor: '#e91e63',
+                                color: '#ffffff',
+                                borderRadius: '4px',
                                 ':hover': { bgcolor: '#d81b60' },
                                 ':disabled': { bgcolor: '#b0bec5', color: '#ffffff' }
-                            }} 
+                            }}
                             disabled={loading}
                         >
                             {loading ? 'Generating...' : 'Generate'}
@@ -208,27 +229,28 @@ export default function Generate(){
                             ))}
                         </Grid>
                         <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
-                            <Button 
-                                variant="contained" 
-                                color="secondary" 
+                            <Button
+                                variant="contained"
+                                color="secondary"
                                 onClick={handleOpen}
                                 sx={{
-                                    bgcolor: '#e91e63', 
-                                    color: '#ffffff', 
-                                    borderRadius: '4px', 
+                                    bgcolor: '#e91e63',
+                                    color: '#ffffff',
+                                    borderRadius: '4px',
                                     ':hover': { bgcolor: '#d81b60' }
                                 }}
                             >
-                                Save
+                                Save Flashcards
                             </Button>
                         </Box>
-                    </Box>    
+                    </Box>
                 )}
+
                 <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle sx={{ color: '#ffffff' }}>Save Flashcards</DialogTitle>
+                    <DialogTitle>Save Flashcard Set</DialogTitle>
                     <DialogContent>
-                        <DialogContentText sx={{ color: '#ffffff' }}>
-                            Enter a name for your flashcard set:
+                        <DialogContentText>
+                            Enter a name for your flashcard set.
                         </DialogContentText>
                         <TextField
                             autoFocus
@@ -237,19 +259,15 @@ export default function Generate(){
                             label="Flashcard Set Name"
                             type="text"
                             fullWidth
-                            variant="outlined"
+                            variant="standard"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             sx={{ bgcolor: '#333', borderRadius: '4px', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose} sx={{ color: '#ffffff' }}>
-                            Cancel
-                        </Button>
-                        <Button onClick={saveFlashcards} sx={{ bgcolor: '#e91e63', color: '#ffffff', ':hover': { bgcolor: '#d81b60' } }}>
-                            Save
-                        </Button>
+                        <Button onClick={handleClose} color="error">Cancel</Button>
+                        <Button onClick={saveFlashcards} color="secondary">Save</Button>
                     </DialogActions>
                 </Dialog>
             </Container>
