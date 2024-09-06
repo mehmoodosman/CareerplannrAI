@@ -6,14 +6,70 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material"
 import Footer from "@/components/Footer";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from '@mui/material/styles';
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 export default function Generate() {
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([]) 
     const [flipped, setFlipped] = useState([]) 
     const [text, setText] = useState('') 
     const [name, setName] = useState('') 
-    const [open, setOpen] = useState(false) 
+    const [open, setOpen] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [file, setFile] = useState(null)
     const router = useRouter()
+
+    const handleUpload = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+        setError(null);
+    
+        const selectedFile = event.target.files[0];
+        console.log(`Uploading ${selectedFile}`);
+        if (selectedFile) {
+          setFile(selectedFile);
+        }
+    
+        try {
+          const formData = new FormData();
+          formData.append('file', selectedFile); // Change file to selectedFile instead of file state
+    
+          const response = await fetch(`/api/loader`, {
+            method: "POST",
+            body: formData,
+          });
+    
+          // Check if the response is okay
+          if (!response.ok) {
+            throw new Error(`Error fetching file`);
+          }
+    
+          const data = await response.json();
+          console.log("loader response: ", data);
+          
+          // Assuming `pageContent` is the text content of the file
+          const loadedContent = data.map((page) => page.pageContent).join('\n'); // Combine all pages
+          setText(loadedContent); // Set the resume content to be displayed in the TextField
+    
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+    };
 
     const handleSubmit = async () => {
         fetch('/api/generate', {
@@ -100,12 +156,33 @@ export default function Generate() {
                 <TextField 
                     value={text} 
                     onChange={(e) => setText(e.target.value)} 
-                    label="Enter text" 
+                    label="Paste resume text here"
                     fullWidth
-                    rows={4}
+                    multiline
+                    rows={8}
                     variant="outlined"
                     sx={{ mb: 2, bgcolor: '#333', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                 />
+
+                <Typography align='center' color='#808080' gutterBottom> --- or ---</Typography>
+                <Box mb={6} display='flex' justifyContent='center'>
+                    {/* Button with file upload */}
+                    <Button
+                    component="label"
+                    value={name}
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<CloudUploadIcon />}
+                    >
+                    Upload resume
+                    <VisuallyHiddenInput
+                        type="file"
+                        onChange={handleUpload}
+                    />
+                    </Button>
+                </Box>
+
                 <Button 
                     variant="contained" 
                     color="secondary" 
@@ -170,10 +247,10 @@ export default function Generate() {
                                         }}>
                                             <div>
                                                 <div>
-                                                    <Typography variant="h6" component="div">{flashcard.front}</Typography>
+                                                    <Typography variant="h6" component="div" sx={{ textAlign: 'center' }}> {flashcard.front}</Typography>
                                                 </div>
                                                 <div>
-                                                    <Typography variant="subtitle2" component="div">{flashcard.back}</Typography>
+                                                    <Typography variant="subtitle2" component="div" sx={{ textAlign: 'center' }}> {flashcard.back}</Typography>
                                                 </div>
                                             </div>
                                         </Box>
@@ -211,7 +288,8 @@ export default function Generate() {
                     margin="dense"
                     label="Collection Name"
                     type="text"
-                    fullWidth 
+                    fullWidth
+                    multiline
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     variant="outlined"

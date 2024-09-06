@@ -142,7 +142,7 @@ export default function CareerPage() {
             }}
           />
 
-          <Typography> ------ or ------</Typography>
+          <Typography color='#808080'> --- or ---</Typography>
 
           {/* Button with file upload */}
           <Button
@@ -153,7 +153,7 @@ export default function CareerPage() {
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
           >
-            Upload files
+            Upload resume
             <VisuallyHiddenInput
               type="file"
               onChange={handleUpload}
