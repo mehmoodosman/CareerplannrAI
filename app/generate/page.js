@@ -91,7 +91,7 @@ export default function Generate() {
     }
 
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#fff' }}>
             <Box sx={{
                 mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
             }}>
@@ -220,7 +220,7 @@ export default function Generate() {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleClose} sx={{ color: '#e91e63' }}>Cancel</Button>
                     <Button 
                         onClick={saveFlashcards}
                         sx={{
