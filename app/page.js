@@ -106,7 +106,7 @@ export default function Home() {
         fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
         textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
       }}>
-        Welcome to Careerplannr AI
+        Welcome to CareerSwipe AI
       </Typography>
       <Typography variant="h5" color="textSecondary" gutterBottom sx={{
         fontFamily: 'Roboto, sans-serif', color: '#bbbbbb',
@@ -136,7 +136,16 @@ export default function Home() {
       padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
       ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
     }}>
-      Start Your Career Exploration
+      Start Your Career Recommendations
+    </Button>
+  </Link>
+  <Link href="/generate" passHref legacyBehavior>
+    <Button variant="contained" size="large" sx={{
+      backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
+      padding: '14px 40px', marginBottom: 8, marginLeft: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+      ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
+    }}>
+      Start Your Career Cards Exploration
     </Button>
   </Link>
     </Container>
@@ -187,12 +196,12 @@ export default function Home() {
             <Typography variant="h5" fontWeight="bold" gutterBottom sx={{
               color: '#e91e63', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 8px rgba(233, 30, 99, 0.6)'
             }}>
-              Expert Advice
+              Career Cards
             </Typography>
             <Typography color="textSecondary" sx={{
               color: '#bbbbbb', fontFamily: 'Roboto, sans-serif', textShadow: '0 0 5px rgba(255, 255, 255, 0.5)'
             }}>
-              Learn from industry experts and gain insights to advance your career.
+              Discover personalized job titles and why you’re a top fit. Elevate your career path with ease.
             </Typography>
           </Box>
         </Grid>

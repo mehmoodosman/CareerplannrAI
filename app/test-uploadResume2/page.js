@@ -1,11 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Button, Container, Typography, TextField, CircularProgress } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
 import Image from 'next/image';
-
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -60,19 +59,20 @@ export default function CareerPage() {
     setLoading(true);
     setError(null);
 
-    const selectedFile = event.target.files[0]
+    const selectedFile = event.target.files[0];
+    console.log(`Uploading ${selectedFile}`);
     if (selectedFile) {
-      setFile(selectedFile)
+      setFile(selectedFile);
     }
 
     try {
-      const formData = new FormData()
-      formData.append('file', file)
+      const formData = new FormData();
+      formData.append('file', selectedFile); // Change file to selectedFile instead of file state
 
       const response = await fetch(`/api/loader`, {
         method: "POST",
         body: formData,
-      })
+      });
 
       // Check if the response is okay
       if (!response.ok) {
@@ -81,14 +81,17 @@ export default function CareerPage() {
 
       const data = await response.json();
       console.log("loader response: ", data);
-      setResume(data.careerpath[0].pageContent);
+      
+      // Assuming `pageContent` is the text content of the file
+      const loadedContent = data.map((page) => page.pageContent).join('\n'); // Combine all pages
+      setResume(loadedContent); // Set the resume content to be displayed in the TextField
 
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -96,7 +99,6 @@ export default function CareerPage() {
         
         {/* Logo */}
         <Link href="/" passHref>
-
           <Image 
             src="/CareerSwipe.svg"
             alt="CareerSwipe Logo"
@@ -104,7 +106,6 @@ export default function CareerPage() {
             height={100}
             style={{ objectFit: 'contain', cursor: 'pointer', marginBottom: '20px' }}
           />
-
         </Link>
 
         <Typography variant="h3" gutterBottom sx={{
@@ -145,7 +146,6 @@ export default function CareerPage() {
           <Button
             component="label"
             value={resume}
-            onChange={(e) => setFile(e.target.files[0])}
             role={undefined}
             variant="contained"
             tabIndex={-1}
@@ -191,31 +191,6 @@ export default function CareerPage() {
               <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
                 Description: {careerPath.description}
               </Typography>
-
-            </Box>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                Overview: {careerPath.overview}
-              </Typography>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                DISPLAY THIS FOR PREMIUM USERS ONLY
-              </Typography>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                Responsibilities: {careerPath.responsibilities}
-              </Typography>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                Skills: {careerPath.skills}
-              </Typography>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                Outlook: {careerPath.outlook}
-              </Typography>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                Strength: {careerPath.strengths}
-              </Typography>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                Weaknesses: {careerPath.weaknesses}
-              </Typography>
-            <Box>
-
             </Box>
           </Box>
         )}
