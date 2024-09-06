@@ -92,150 +92,150 @@ export default function Generate() {
 
     return (
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
-        <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#fff', minHeight: '100vh' }}>
-            <Box sx={{
-                mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
-            }}>
-                <Typography variant="h4" gutterBottom>Generate Careercards</Typography>
-                <Paper sx={{ p: 4, width: '100%', bgcolor: 'yellow', borderRadius: '8px' }}>
-                    <TextField 
-                        value={text} 
-                        onChange={(e) => setText(e.target.value)} 
-                        label="Enter text" 
-                        fullWidth
-                        rows={4}
-                        variant="outlined"
-                        sx={{ mb: 2, bgcolor: 'yellow', borderRadius: '4px' }} 
-                    />
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        onClick={handleSubmit} 
-                        fullWidth
-                        sx={{
-                            bgcolor: '#1e88e5', 
-                            color: '#fff', 
-                            borderRadius: '4px', 
-                            ':hover': { bgcolor: '#1565c0' },
-                            ':disabled': { bgcolor: '#b0bec5', color: '#fff' }
-                        }} 
-                        disabled={loading}
-                    >
-                        {loading ? 'Generating...' : 'Generate'}
-                    </Button>
-                </Paper>
-            </Box>
-            
-            {flashcards.length > 0 && (
-                <Box sx={{ mt: 4 }}>
-                    <Typography variant="h5" gutterBottom>Careercards Preview</Typography>
-                    <Grid container spacing={3}>
-                        {flashcards.map((flashcard, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
-                                <Card
-                                    sx={{
-                                        bgcolor: '#2c2c2c',
-                                        borderRadius: '15px',
-                                        color: '#ffffff',
-                                        boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4)',
-                                        transition: 'transform 0.3s, box-shadow 0.3s',
-                                        ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.6)' },
-                                    }}
-                                >
-                                    <CardActionArea onClick={() => handleCardClick(index)}>
-                                        <CardContent>
-                                            <Box sx={{
-                                                perspective: '1000px',
-                                                '& > div': {
-                                                    transition: 'transform 0.6s',
-                                                    transformStyle: 'preserve-3d',
-                                                    position: 'relative',
-                                                    width: '100%',
-                                                    height: '200px',
-                                                    boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
-                                                    transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                                                },
-                                                '& > div > div': {
-                                                    position: 'absolute',
-                                                    width: '100%',
-                                                    height: '100%',
-                                                    backfaceVisibility: 'hidden',
-                                                    display: 'flex',
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                    padding: 2,
-                                                    boxSizing: 'border-box',
-                                                },
-                                                '& > div > div:nth-of-type(2)': {
-                                                    transform: 'rotateY(180deg)',
-                                                },
-                                            }}>
-                                                <div>
-                                                    <div>
-                                                        <Typography variant="h6" component="div">{flashcard.front}</Typography>
-                                                    </div>
-                                                    <div>
-                                                        <Typography variant="subtitle2" component="div">{flashcard.back}</Typography>
-                                                    </div>
-                                                </div>
-                                            </Box>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                    <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+            <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#fff', minHeight: '100vh', p: 4 }}>
+                <Box sx={{
+                    mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+                }}>
+                    <Typography variant="h4" gutterBottom>Generate Careercards</Typography>
+                    <Paper sx={{ p: 4, width: '100%', bgcolor: '#1e1e1e', borderRadius: '8px' }}>
+                        <TextField 
+                            value={text} 
+                            onChange={(e) => setText(e.target.value)} 
+                            label="Enter text" 
+                            fullWidth
+                            rows={4}
+                            variant="outlined"
+                            sx={{ mb: 2, bgcolor: '#2c2c2c', borderRadius: '4px', '& .MuiInputBase-root': { color: '#ffffff' }}} 
+                        />
                         <Button 
                             variant="contained" 
-                            color="secondary" 
-                            onClick={handleOpen}
+                            color="primary" 
+                            onClick={handleSubmit} 
+                            fullWidth
                             sx={{
-                                bgcolor: '#e91e63', 
+                                bgcolor: '#1e88e5', 
                                 color: '#fff', 
                                 borderRadius: '4px', 
-                                ':hover': { bgcolor: '#c2185b' }
+                                ':hover': { bgcolor: '#1565c0' },
+                                ':disabled': { bgcolor: '#b0bec5', color: '#fff' }
+                            }} 
+                            disabled={loading}
+                        >
+                            {loading ? 'Generating...' : 'Generate'}
+                        </Button>
+                    </Paper>
+                </Box>
+                
+                {flashcards.length > 0 && (
+                    <Box sx={{ mt: 4 }}>
+                        <Typography variant="h5" gutterBottom>Careercards Preview</Typography>
+                        <Grid container spacing={3}>
+                            {flashcards.map((flashcard, index) => (
+                                <Grid item xs={12} sm={6} md={4} key={index}>
+                                    <Card
+                                        sx={{
+                                            bgcolor: '#2c2c2c',
+                                            borderRadius: '15px',
+                                            color: '#ffffff',
+                                            boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4)',
+                                            transition: 'transform 0.3s, box-shadow 0.3s',
+                                            ':hover': { transform: 'scale(1.05)', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.6)' },
+                                        }}
+                                    >
+                                        <CardActionArea onClick={() => handleCardClick(index)}>
+                                            <CardContent>
+                                                <Box sx={{
+                                                    perspective: '1000px',
+                                                    '& > div': {
+                                                        transition: 'transform 0.6s',
+                                                        transformStyle: 'preserve-3d',
+                                                        position: 'relative',
+                                                        width: '100%',
+                                                        height: '200px',
+                                                        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+                                                        transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                                                    },
+                                                    '& > div > div': {
+                                                        position: 'absolute',
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        backfaceVisibility: 'hidden',
+                                                        display: 'flex',
+                                                        justifyContent: 'center',
+                                                        alignItems: 'center',
+                                                        padding: 2,
+                                                        boxSizing: 'border-box',
+                                                    },
+                                                    '& > div > div:nth-of-type(2)': {
+                                                        transform: 'rotateY(180deg)',
+                                                    },
+                                                }}>
+                                                    <div>
+                                                        <div>
+                                                            <Typography variant="h6" component="div">{flashcard.front}</Typography>
+                                                        </div>
+                                                        <div>
+                                                            <Typography variant="subtitle2" component="div">{flashcard.back}</Typography>
+                                                        </div>
+                                                    </div>
+                                                </Box>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Card>
+                                </Grid>
+                            ))}
+                        </Grid>
+                        <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+                            <Button 
+                                variant="contained" 
+                                color="secondary" 
+                                onClick={handleOpen}
+                                sx={{
+                                    bgcolor: '#e91e63', 
+                                    color: '#fff', 
+                                    borderRadius: '4px', 
+                                    ':hover': { bgcolor: '#c2185b' }
+                                }}
+                            >
+                                Save
+                            </Button>
+                        </Box>
+                    </Box>    
+                )}
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>Save Flashcards</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Enter the name of your flashcards collection
+                        </DialogContentText>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            label="Collection Name"
+                            type="text"
+                            fullWidth 
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            variant="outlined"
+                            sx={{ bgcolor: '#1e1e1e', color: '#fff', borderRadius: '4px' }}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button 
+                            onClick={saveFlashcards}
+                            sx={{
+                                bgcolor: '#1e88e5', 
+                                color: '#fff', 
+                                borderRadius: '4px', 
+                                ':hover': { bgcolor: '#1565c0' }
                             }}
                         >
                             Save
                         </Button>
-                    </Box>
-                </Box>    
-            )}
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Save Flashcards</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Enter the name of your flashcards collection
-                    </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        label="Collection Name"
-                        type="text"
-                        fullWidth 
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        variant="outlined"
-                        sx={{ bgcolor: '#fff', borderRadius: '4px' }}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button 
-                        onClick={saveFlashcards}
-                        sx={{
-                            bgcolor: '#1e88e5', 
-                            color: '#fff', 
-                            borderRadius: '4px', 
-                            ':hover': { bgcolor: '#1565c0' }
-                        }}
-                    >
-                        Save
-                    </Button>
-                </DialogActions>
-            </Dialog>    
-        </Container>
+                    </DialogActions>
+                </Dialog>    
+            </Container>
         </Box>
     )
 }
