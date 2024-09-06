@@ -24,6 +24,7 @@ export default function CareerPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [file, setFile] = useState(null)
+  const [roadmap, setRoadmap] = useState(null)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -92,6 +93,35 @@ export default function CareerPage() {
       setLoading(false);
     }
   };
+
+  const handleGenerateRoadmap = async () => {
+    if (!careerPath?.title) return; // Ensure title exists before calling the roadmap API
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/generate-roadmap', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: careerPath.title }), // Pass the career title to the API
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate roadmap');
+      }
+
+      const data = await response.json();
+      setRoadmap(data.roadmap); // Set the roadmap data
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   return (
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -187,11 +217,43 @@ export default function CareerPage() {
               Recommended Career Path
             </Typography>
             <Typography variant="h6" sx={{ marginTop: 2, color: '#ffffff' }}>Title: {careerPath.title}</Typography>
-            <Box sx={{ textAlign: 'left'}}>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                Description: {careerPath.description}
+            <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
+              {careerPath.description}
+            </Typography>
+
+            {/* Button to generate roadmap */}
+            <Button 
+              onClick={handleGenerateRoadmap}
+              variant="contained"
+              sx={{
+                backgroundColor: '#e91e63', 
+                color: 'white', 
+                textTransform: 'none', 
+                fontWeight: 'bold', 
+                borderRadius: '25px',
+                padding: '10px 40px', 
+                marginTop: '20px',
+                boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+                ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
+              }}
+            >
+              {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : 'Generate Roadmap'}
+            </Button>
+          </Box>
+        )}
+
+        {/* Render the roadmap if available */}
+        {roadmap && (
+          <Box sx={{ textAlign: 'center', marginTop: 4, bgcolor: '#2c2c2c', padding: 3, borderRadius: '12px', boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)' }}>
+            <Typography variant="h5" fontWeight="bold" sx={{ color: '#e91e63' }} gutterBottom>
+              Career Roadmap
+            </Typography>
+            <Typography variant="h6" sx={{ marginTop: 2, color: '#ffffff' }}>Steps:</Typography>
+            {roadmap.steps.map((step, index) => (
+              <Typography key={index} sx={{ color: '#bbbbbb', marginTop: '8px' }}>
+                Step {index + 1}: {step}
               </Typography>
-            </Box>
+            ))}
           </Box>
         )}
       </Container>
