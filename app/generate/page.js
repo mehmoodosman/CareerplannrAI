@@ -5,6 +5,8 @@ import { useUser } from "@clerk/nextjs"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material"
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Generate() {
     const { isLoaded, isSignedIn, user } = useUser()
@@ -93,11 +95,31 @@ export default function Generate() {
     return (
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
             <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#ffffff', minHeight: '100vh', p: 4 }}>
-                <Box sx={{ mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                    <Typography variant="h4" gutterBottom sx={{ color: '#ffffff' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
+                    <Box sx={{ flexGrow: 1 }}>
+                        {/* Logo wrapped in Link */}
+                        <Link href="/" passHref>
+                            <Image 
+                                src="/CareerSwipe.svg"  
+                                alt="CareerSwipe Logo"
+                                width={100}  
+                                height={100}
+                                style={{ objectFit: 'contain', cursor: 'pointer' }}
+                            />
+                        </Link>
+                    </Box>
+                    <Typography variant="h4" gutterBottom sx={{
+                        color: '#e91e63',
+                        fontWeight: 'bold',
+                        textShadow: '0 0 10px #e91e63', // Glowing effect
+                        textAlign: 'center',
+                        flexGrow: 2,
+                    }}>
                         Generate Careercards
                     </Typography>
-                    <Paper sx={{ p: 4, width: '100%', bgcolor: '#2c2c2c', borderRadius: '8px' }}>
+                </Box>
+                <Box sx={{ mb: 6 }}>
+                    <Paper sx={{ p: 4, bgcolor: '#2c2c2c', borderRadius: '8px' }}>
                         <TextField 
                             value={text} 
                             onChange={(e) => setText(e.target.value)} 
@@ -109,14 +131,14 @@ export default function Generate() {
                         />
                         <Button 
                             variant="contained" 
-                            color="primary" 
+                            color="secondary" 
                             onClick={handleSubmit} 
                             fullWidth
                             sx={{
-                                bgcolor: '#1e88e5', 
+                                bgcolor: '#e91e63', 
                                 color: '#ffffff', 
                                 borderRadius: '4px', 
-                                ':hover': { bgcolor: '#1565c0' },
+                                ':hover': { bgcolor: '#d81b60' },
                                 ':disabled': { bgcolor: '#b0bec5', color: '#ffffff' }
                             }} 
                             disabled={loading}
@@ -125,7 +147,7 @@ export default function Generate() {
                         </Button>
                     </Paper>
                 </Box>
-                
+
                 {flashcards.length > 0 && (
                     <Box sx={{ mt: 4 }}>
                         <Typography variant="h5" gutterBottom sx={{ color: '#ffffff' }}>
@@ -196,7 +218,7 @@ export default function Generate() {
                                     bgcolor: '#e91e63', 
                                     color: '#ffffff', 
                                     borderRadius: '4px', 
-                                    ':hover': { bgcolor: '#c2185b' }
+                                    ':hover': { bgcolor: '#d81b60' }
                                 }}
                             >
                                 Save
@@ -208,35 +230,25 @@ export default function Generate() {
                     <DialogTitle sx={{ color: '#ffffff' }}>Save Flashcards</DialogTitle>
                     <DialogContent>
                         <DialogContentText sx={{ color: '#ffffff' }}>
-                            Enter the name of your flashcards collection
+                            Enter the name of your flashcards collection.
                         </DialogContentText>
                         <TextField
                             autoFocus
                             margin="dense"
                             label="Collection Name"
                             type="text"
-                            fullWidth 
+                            fullWidth
+                            variant="outlined"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            variant="outlined"
-                            sx={{ bgcolor: '#333', borderRadius: '4px', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
+                            sx={{ bgcolor: '#333', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose} sx={{ color: '#ffffff' }}>Cancel</Button>
-                        <Button 
-                            onClick={saveFlashcards}
-                            sx={{
-                                bgcolor: '#1e88e5', 
-                                color: '#ffffff', 
-                                borderRadius: '4px', 
-                                ':hover': { bgcolor: '#1565c0' }
-                            }}
-                        >
-                            Save
-                        </Button>
+                        <Button onClick={handleClose} sx={{ color: '#e91e63' }}>Cancel</Button>
+                        <Button onClick={saveFlashcards} sx={{ color: '#e91e63' }}>Save</Button>
                     </DialogActions>
-                </Dialog>    
+                </Dialog>
             </Container>
         </Box>
     )
