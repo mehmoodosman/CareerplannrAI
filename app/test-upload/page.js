@@ -1,11 +1,16 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Box, Button, Container, Typography, TextField, CircularProgress } from '@mui/material';
+import { Box, Button, Container, Divider, Stack, Typography, TextField, CircularProgress } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
 import Image from 'next/image';
 import Footer from "@/components/Footer";
+import BoltIcon from '@mui/icons-material/Bolt';
+import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing';
+import HandymanIcon from '@mui/icons-material/Handyman';
+import BrokenImageOutlinedIcon from '@mui/icons-material/BrokenImageOutlined';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -184,16 +189,46 @@ export default function CareerPage() {
         {error && <Typography sx={{ color: 'red', marginTop: 2 }}>{error}</Typography>}
 
         {careerPath && (
-          <Box sx={{ textAlign: 'center', marginTop: 4, bgcolor: '#2c2c2c', padding: 3, borderRadius: '12px', boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)' }}>
+          <Box sx={{ textAlign: 'center', margin: 2, bgcolor: '#2c2c2c', padding: 3, borderRadius: '12px', boxShadow: '0 8px 20px rgba(0, 0, 0, 0.4)' }}>
             <Typography variant="h5" fontWeight="bold" sx={{ color: '#e91e63' }} gutterBottom>
               Recommended Career Path
             </Typography>
             <Typography variant="h6" sx={{ marginTop: 2, color: '#ffffff' }}>Title: {careerPath.title}</Typography>
-            <Box sx={{ textAlign: 'left'}}>
-              <Typography sx={{ color: '#bbbbbb' }} gutterBottom>
-                Description: {careerPath.description}
+            <Box sx={{ textAlign: 'left', paddingBottom: 2}}>
+              <Typography sx={{ color: '#bbbbbb', textAlign: 'center', marginBottom: 4, marginX: 4 }} gutterBottom>
+                {careerPath.description}
               </Typography>
+              <Stack direction='row' >
+                <HandymanIcon sx={{ color: '#fff' }} />
+                <Typography sx={{ color: '#bbbbbb', paddingLeft: 2}} gutterBottom> 
+                  {careerPath.skills}
+                </Typography>
+              </Stack>
+              <Stack direction='row' >
+                <CallMissedOutgoingIcon />
+                <Typography sx={{ color: '#bbbbbb', paddingLeft: 2}} gutterBottom> 
+                  {careerPath.outlook}
+                </Typography>
+              </Stack>
+              <Stack direction='row' >
+                <BoltIcon sx={{ color: '#fff' }} />
+                <Typography sx={{ color: '#bbbbbb', paddingLeft: 2}} gutterBottom> 
+                  {careerPath.strengths}
+                </Typography>
+              </Stack>
+              <Stack direction='row' >
+                <BrokenImageOutlinedIcon />
+                <Typography sx={{ color: '#bbbbbb', paddingLeft: 2}} gutterBottom> 
+                  {careerPath.weaknesses}
+                </Typography>
+              </Stack>
             </Box>
+
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+              <Typography sx={{ fontSize: 14, marginRight: 1 }}>Get detailed report</Typography>
+              <Link href='/' ><ArrowForwardRoundedIcon sx={{ color: '#e91e63' }} /></Link>
+            </Box>
+  
           </Box>
         )}
       </Container>
