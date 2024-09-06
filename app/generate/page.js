@@ -190,6 +190,7 @@ export default function Generate() {
                                 role={undefined}
                                 variant="contained"
                                 tabIndex={-1}
+                                color='d81b60'
                                 startIcon={<CloudUploadIcon />}
                             >
                                 Upload resume
