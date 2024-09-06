@@ -94,8 +94,10 @@ export default function Generate() {
 
     return (
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
-            <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#ffffff', minHeight: '100vh', p: 4 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
+  
+            {/* Navbar */}
+            <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
+                <Toolbar>
                     <Box sx={{ flexGrow: 1 }}>
                         {/* Logo wrapped in Link */}
                         <Link href="/" passHref>
@@ -108,16 +110,20 @@ export default function Generate() {
                             />
                         </Link>
                     </Box>
+
                     <Typography variant="h4" gutterBottom sx={{
-                        color: '#e91e63',
+                        color: 'white',
                         fontWeight: 'bold',
-                        textShadow: '0 0 10px #e91e63', // Glowing effect
+                        textShadow: '0 0 10px #e91e63',
                         textAlign: 'center',
                         flexGrow: 2,
                     }}>
                         Generate Careercards
                     </Typography>
-                </Box>
+                </Toolbar>
+            </AppBar>
+
+            <Container>
                 <Box sx={{ mb: 6 }}>
                     <Paper sx={{ p: 4, bgcolor: '#2c2c2c', borderRadius: '8px' }}>
                         <TextField 
@@ -241,12 +247,12 @@ export default function Generate() {
                             variant="outlined"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            sx={{ bgcolor: '#333', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
+                            sx={{ bgcolor: '#333', borderRadius: '4px', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} sx={{ color: '#e91e63' }}>Cancel</Button>
-                        <Button onClick={saveFlashcards} sx={{ color: '#e91e63' }}>Save</Button>
+                        <Button onClick={saveFlashcards} sx={{ bgcolor: '#e91e63', color: '#ffffff', ':hover': { bgcolor: '#d81b60' } }}>Save</Button>
                     </DialogActions>
                 </Dialog>
             </Container>
