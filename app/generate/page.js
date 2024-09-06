@@ -91,12 +91,13 @@ export default function Generate() {
     }
 
     return (
+        <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
         <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#fff', minHeight: '100vh' }}>
             <Box sx={{
                 mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
             }}>
                 <Typography variant="h4" gutterBottom>Generate Careercards</Typography>
-                <Paper sx={{ p: 4, width: '100%', bgcolor: '#333', borderRadius: '8px' }}>
+                <Paper sx={{ p: 4, width: '100%', bgcolor: 'yellow', borderRadius: '8px' }}>
                     <TextField 
                         value={text} 
                         onChange={(e) => setText(e.target.value)} 
@@ -104,7 +105,7 @@ export default function Generate() {
                         fullWidth
                         rows={4}
                         variant="outlined"
-                        sx={{ mb: 2, bgcolor: 'white', borderRadius: '4px' }} 
+                        sx={{ mb: 2, bgcolor: 'yellow', borderRadius: '4px' }} 
                     />
                     <Button 
                         variant="contained" 
@@ -235,5 +236,6 @@ export default function Generate() {
                 </DialogActions>
             </Dialog>    
         </Container>
+        </Box>
     )
 }
