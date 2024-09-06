@@ -182,23 +182,31 @@ export default function Generate() {
                             sx={{ mb: 2, bgcolor: '#333', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
 
-                        <Typography align='center' color='#d81b60' gutterBottom> --- or ---</Typography>
-                        <Box mb={6} display='flex' justifyContent='center' color='d81b60'>
-                            {/* Button with file upload */}
-                            <Button
-                                component="label"
-                                role={undefined}
-                                variant="contained"
-                                tabIndex={-1}
-                                color='d81b60'
-                                startIcon={<CloudUploadIcon />}
-                            >
-                                Upload resume
-                                <VisuallyHiddenInput
-                                    type="file"
-                                    onChange={handleUpload}
-                                />
-                            </Button>
+<Typography align='center' color='#d81b60' gutterBottom>
+                --- or ---
+            </Typography>
+            <Box mb={6} display='flex' justifyContent='center'>
+                {/* Button with file upload */}
+                <Button
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<CloudUploadIcon />}
+                    sx={{
+                        backgroundColor: '#d81b60',
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#c2185b', // Slightly darker shade for hover effect
+                        }
+                    }}
+                >
+                    Upload resume
+                    <VisuallyHiddenInput
+                        type="file"
+                        onChange={handleUpload}
+                    />
+                </Button>
                         </Box>
 
                         <Button 
