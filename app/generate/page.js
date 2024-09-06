@@ -288,7 +288,6 @@ export default function Generate() {
                                 mt: 4,
                                 bgcolor: '#e91e63',
                                 color: '#ffffff',
-                                gap: '4px',
                                 borderRadius: '4px',
                                 ':hover': { bgcolor: '#d81b60' }
                             }}
