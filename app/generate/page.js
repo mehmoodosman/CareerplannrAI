@@ -8,8 +8,8 @@ import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionA
 import Footer from "@/components/Footer";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
-import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
-import Image from 'next/image'; // Import Image for the logo
+import HomeIcon from '@mui/icons-material/Home';
+import Image from 'next/image';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -182,7 +182,7 @@ export default function Generate() {
                             sx={{ mb: 2, bgcolor: '#333', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
 
-                        <Typography align='center' color='#808080' gutterBottom> --- or ---</Typography>
+                        <Typography align='center' color='#d81b60' gutterBottom> --- or ---</Typography>
                         <Box mb={6} display='flex' justifyContent='center'>
                             {/* Button with file upload */}
                             <Button
@@ -313,7 +313,7 @@ export default function Generate() {
                             variant="standard"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            sx={{ bgcolor: '#333', color: '#ffffff' }}
+                            sx={{ bgcolor: '#fff', color: '#333333' }}
                         />
                     </DialogContent>
                     <DialogActions>
