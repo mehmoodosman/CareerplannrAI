@@ -1,25 +1,21 @@
 'use client'
-import { writeBatch, doc, collection, getDoc } from "firebase/firestore"
+import { writeBatch, doc, collection, getDoc, setDoc } from "firebase/firestore"
 import { db } from "@/firebase"
 import { useUser } from "@clerk/nextjs"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material"
-import Link from 'next/link'
-import Image from 'next/image'
 
-export default function Generate() {
+export default function Generate(){
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([]) 
     const [flipped, setFlipped] = useState([]) 
     const [text, setText] = useState('') 
     const [name, setName] = useState('') 
     const [open, setOpen] = useState(false) 
-    const [loading, setLoading] = useState(false) 
     const router = useRouter()
 
     const handleSubmit = async () => {
-        setLoading(true)
         fetch('/api/generate', {
             method: 'POST',
             body: JSON.stringify({ text }),
@@ -40,8 +36,7 @@ export default function Generate() {
         .then((data) => setFlashcards(data))
         .catch((error) => {
             console.error('There was a problem with the fetch operation:', error);
-        })
-        .finally(() => setLoading(false)) // Ensure loading state is reset
+        });
     }
 
     const handleCardClick = (id) => {
@@ -58,9 +53,9 @@ export default function Generate() {
     const handleClose = () => {
         setOpen(false)
     }
-
+    
     const saveFlashcards = async () => {
-        if (!name) {
+        if(!name) {
             alert('Please enter a name')
             return 
         }
@@ -68,17 +63,17 @@ export default function Generate() {
         const userDocRef = doc(collection(db, 'users'), user.id)
         const docSnap = await getDoc(userDocRef)
 
-        if (docSnap.exists()) {
+        if(docSnap.exists()){
             const collections = docSnap.data().flashcards || []
-            if (collections.find((f) => f.name === name)) {
+            if (collections.find((f) => f.name === name)){
                 alert('Flashcard collection with the same name already exists')
                 return
             } else {
-                collections.push({ name })
-                batch.set(userDocRef, { flashcards: collections }, { merge: true })
+                collections.push({name})
+                batch.set(userDocRef, {flashcards: collections}, {merge: true})
             }
         } else {
-            batch.set(userDocRef, { flashcards: [{ name }] })
+            batch.set(userDocRef, {flashcards: [{name}]})
         }
 
         const colRef = collection(userDocRef, name)
@@ -91,7 +86,7 @@ export default function Generate() {
         handleClose()
         router.push('/flashcards')
     }
-
+    
     return (
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
             {/* Navbar */}
