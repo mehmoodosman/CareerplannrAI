@@ -1,5 +1,5 @@
 'use client'
-import { writeBatch, doc, collection, getDoc, setDoc } from "firebase/firestore"
+import { writeBatch, doc, collection, getDoc } from "firebase/firestore"
 import { db } from "@/firebase"
 import { useUser } from "@clerk/nextjs"
 import { useState } from "react"
@@ -91,7 +91,7 @@ export default function Generate() {
     }
 
     return (
-        <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#fff' }}>
+        <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#fff', minHeight: '100vh' }}>
             <Box sx={{
                 mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
             }}>
@@ -220,7 +220,7 @@ export default function Generate() {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} sx={{ color: '#e91e63' }}>Cancel</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
                     <Button 
                         onClick={saveFlashcards}
                         sx={{
