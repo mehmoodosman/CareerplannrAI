@@ -25,7 +25,7 @@ export const Footer = () => {
             <IconButton component="a" href="https://github.com/BarnabasNovak1" target="_blank" sx={{ color: '#ffffff' }}>
               <GitHubIcon />
             </IconButton>
-            <IconButton component="a" href="https://github.com/ayeshm3" target="_blank" sx={{ color: '#ffffff' }}>
+            <IconButton component="a" href="https://github.com/mahmoodayesha" target="_blank" sx={{ color: '#ffffff' }}>
               <GitHubIcon />
             </IconButton>
             <IconButton component="a" href="https://github.com/itancio" target="_blank" sx={{ color: '#ffffff' }}>
