@@ -1,4 +1,6 @@
 # CareerSwipe
+
+## Overview
 Careerplannr AI is a web application that provides personalized career path recommendations in a user-friendly, swipe-able interface. Users can import their LinkedIn profiles or resumes to generate tailored career suggestions. Favorited career paths will be saved to a profile dashboard, where users can access a detailed roadmap for each selected option.
 
 ## Tech Stacks
@@ -10,10 +12,10 @@ Careerplannr AI is a web application that provides personalized career path reco
 * Clerk
 * Firebase
 * Pinecone
-* 
 
-## Troubleshooting
 
+## Developer Documentation
+### Troubleshooting
 
 Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
 Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
