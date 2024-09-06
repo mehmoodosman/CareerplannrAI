@@ -144,6 +144,8 @@ export default function Generate() {
     }
     
     return (
+
+        
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
     <Container maxWidth="md" sx={{ bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
         <Box sx={{
@@ -260,7 +262,7 @@ export default function Generate() {
                         </Grid>
                     ))}
                 </Grid>
-                <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+                <Box sx={{ mt: 4, display: "flex", justifyContent: "center", gap: 2 }}>
                     <Button 
                         variant="contained" 
                         color="secondary" 

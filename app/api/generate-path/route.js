@@ -21,11 +21,6 @@ The goal is to offer a clear and informative description and a fitting job title
 1. Conciseness: Keep descriptions brief and to the point to provide a quick overview.
 2. Clarity: Use straightforward language to ensure the information is easily understood.
 
-Make sure to address the candidate with their first name when describing their strengths and weaknesses.
-For example:
-    Strengths: Yasin has a strong communication, excellent leadership, and ability to work under pressure.
-    Weaknesses: Yasin may struggle with managing multiple projects simultaneously and understanding complex business concepts
-
 Return the list in the following JSON format:
 {
     "careerpath":[
