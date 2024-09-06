@@ -188,7 +188,6 @@ export default function Generate() {
                             <Button
                                 component="label"
                                 role={undefined}
-                                variant="contained"
                                 tabIndex={-1}
                                 color='d81b60'
                                 startIcon={<CloudUploadIcon />}
