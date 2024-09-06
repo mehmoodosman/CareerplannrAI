@@ -8,7 +8,8 @@ import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionA
 import Footer from "@/components/Footer";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
-import Image from 'next/image'; 
+import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
+import Image from 'next/image'; // Import Image for the logo
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -84,21 +85,21 @@ export default function Generate() {
             if (!res.ok) {
                 throw new Error('Network response was not ok');
             }
-            return res.text(); 
+            return res.text();  // Use .text() to handle any empty response
         })
         .then((text) => {
             if (text) {
-                return JSON.parse(text);  
+                return JSON.parse(text);  // Parse the text if it's not empty
             }
-            return {};  
+            return {};  // Handle the case where the response body is empty
         })
         .then((data) => {
             setFlashcards(data);
-            setGenerating(false); 
+            setGenerating(false); // Set generating state to false when done
         })
         .catch((error) => {
             console.error('There was a problem with the fetch operation:', error);
-            setGenerating(false); 
+            setGenerating(false); // Ensure generating state is reset even if there's an error
         });
     }
 
