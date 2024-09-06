@@ -92,12 +92,12 @@ export default function Generate() {
 
     return (
         <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff' }}>
-            <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#fff', minHeight: '100vh', p: 4 }}>
-                <Box sx={{
-                    mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
-                }}>
-                    <Typography variant="h4" gutterBottom>Generate Careercards</Typography>
-                    <Paper sx={{ p: 4, width: '100%', bgcolor: '#1e1e1e', borderRadius: '8px' }}>
+            <Container maxWidth="md" sx={{ bgcolor: '#000', color: '#ffffff', minHeight: '100vh', p: 4 }}>
+                <Box sx={{ mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <Typography variant="h4" gutterBottom sx={{ color: '#ffffff' }}>
+                        Generate Careercards
+                    </Typography>
+                    <Paper sx={{ p: 4, width: '100%', bgcolor: '#2c2c2c', borderRadius: '8px' }}>
                         <TextField 
                             value={text} 
                             onChange={(e) => setText(e.target.value)} 
@@ -105,7 +105,7 @@ export default function Generate() {
                             fullWidth
                             rows={4}
                             variant="outlined"
-                            sx={{ mb: 2, bgcolor: '#2c2c2c', borderRadius: '4px', '& .MuiInputBase-root': { color: '#ffffff' }}} 
+                            sx={{ mb: 2, bgcolor: '#333', borderRadius: '4px', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
                         <Button 
                             variant="contained" 
@@ -114,10 +114,10 @@ export default function Generate() {
                             fullWidth
                             sx={{
                                 bgcolor: '#1e88e5', 
-                                color: '#fff', 
+                                color: '#ffffff', 
                                 borderRadius: '4px', 
                                 ':hover': { bgcolor: '#1565c0' },
-                                ':disabled': { bgcolor: '#b0bec5', color: '#fff' }
+                                ':disabled': { bgcolor: '#b0bec5', color: '#ffffff' }
                             }} 
                             disabled={loading}
                         >
@@ -128,7 +128,9 @@ export default function Generate() {
                 
                 {flashcards.length > 0 && (
                     <Box sx={{ mt: 4 }}>
-                        <Typography variant="h5" gutterBottom>Careercards Preview</Typography>
+                        <Typography variant="h5" gutterBottom sx={{ color: '#ffffff' }}>
+                            Careercards Preview
+                        </Typography>
                         <Grid container spacing={3}>
                             {flashcards.map((flashcard, index) => (
                                 <Grid item xs={12} sm={6} md={4} key={index}>
@@ -192,7 +194,7 @@ export default function Generate() {
                                 onClick={handleOpen}
                                 sx={{
                                     bgcolor: '#e91e63', 
-                                    color: '#fff', 
+                                    color: '#ffffff', 
                                     borderRadius: '4px', 
                                     ':hover': { bgcolor: '#c2185b' }
                                 }}
@@ -203,9 +205,9 @@ export default function Generate() {
                     </Box>    
                 )}
                 <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>Save Flashcards</DialogTitle>
+                    <DialogTitle sx={{ color: '#ffffff' }}>Save Flashcards</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>
+                        <DialogContentText sx={{ color: '#ffffff' }}>
                             Enter the name of your flashcards collection
                         </DialogContentText>
                         <TextField
@@ -217,16 +219,16 @@ export default function Generate() {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             variant="outlined"
-                            sx={{ bgcolor: '#1e1e1e', color: '#fff', borderRadius: '4px' }}
+                            sx={{ bgcolor: '#333', borderRadius: '4px', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={handleClose} sx={{ color: '#ffffff' }}>Cancel</Button>
                         <Button 
                             onClick={saveFlashcards}
                             sx={{
                                 bgcolor: '#1e88e5', 
-                                color: '#fff', 
+                                color: '#ffffff', 
                                 borderRadius: '4px', 
                                 ':hover': { bgcolor: '#1565c0' }
                             }}
