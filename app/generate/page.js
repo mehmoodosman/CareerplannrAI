@@ -1,14 +1,15 @@
 'use client'
-import { writeBatch, doc, collection, getDoc } from "firebase/firestore"
-import { db } from "@/firebase"
-import { useUser } from "@clerk/nextjs"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material"
+import { writeBatch, doc, collection, getDoc } from "firebase/firestore";
+import { db } from "@/firebase";
+import { useUser } from "@clerk/nextjs";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
 import Footer from "@/components/Footer";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
+import Image from 'next/image'; // Import Image for the logo
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -23,57 +24,58 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 export default function Generate() {
-    const { isLoaded, isSignedIn, user } = useUser()
-    const [flashcards, setFlashcards] = useState([]) 
-    const [flipped, setFlipped] = useState([]) 
-    const [text, setText] = useState('') 
-    const [name, setName] = useState('') 
-    const [open, setOpen] = useState(false)
+    const { isLoaded, isSignedIn, user } = useUser();
+    const [flashcards, setFlashcards] = useState([]);
+    const [flipped, setFlipped] = useState([]);
+    const [text, setText] = useState('');
+    const [name, setName] = useState('');
+    const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [generating, setGenerating] = useState(false); 
     const [error, setError] = useState(null);
-    const [file, setFile] = useState(null)
-    const router = useRouter()
+    const [file, setFile] = useState(null);
+    const router = useRouter();
 
     const handleUpload = async (event) => {
         event.preventDefault();
         setLoading(true);
         setError(null);
-    
+
         const selectedFile = event.target.files[0];
         console.log(`Uploading ${selectedFile}`);
         if (selectedFile) {
-          setFile(selectedFile);
+            setFile(selectedFile);
         }
-    
+
         try {
-          const formData = new FormData();
-          formData.append('file', selectedFile); // Change file to selectedFile instead of file state
-    
-          const response = await fetch(`/api/loader`, {
-            method: "POST",
-            body: formData,
-          });
-    
-          // Check if the response is okay
-          if (!response.ok) {
-            throw new Error(`Error fetching file`);
-          }
-    
-          const data = await response.json();
-          console.log("loader response: ", data);
-          
-          // Assuming `pageContent` is the text content of the file
-          const loadedContent = data.map((page) => page.pageContent).join('\n'); // Combine all pages
-          setText(loadedContent); // Set the resume content to be displayed in the TextField
-    
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            const response = await fetch(`/api/loader`, {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error fetching file`);
+            }
+
+            const data = await response.json();
+            console.log("loader response: ", data);
+
+            const loadedContent = data.map((page) => page.pageContent).join('\n');
+            setText(loadedContent);
+
         } catch (error) {
-          setError(error.message);
+            setError(error.message);
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
     };
 
     const handleSubmit = async () => {
+        setGenerating(true); // Set generating state to true
+
         fetch('/api/generate', {
             method: 'POST',
             body: JSON.stringify({ text }),
@@ -83,7 +85,7 @@ export default function Generate() {
             if (!res.ok) {
                 throw new Error('Network response was not ok');
             }
-            return res.text();  // Use .text() instead of .json() to safely handle any empty response
+            return res.text();  // Use .text() to handle any empty response
         })
         .then((text) => {
             if (text) {
@@ -91,9 +93,13 @@ export default function Generate() {
             }
             return {};  // Handle the case where the response body is empty
         })
-        .then((data) => setFlashcards(data))
+        .then((data) => {
+            setFlashcards(data);
+            setGenerating(false); // Set generating state to false when done
+        })
         .catch((error) => {
             console.error('There was a problem with the fetch operation:', error);
+            setGenerating(false); // Ensure generating state is reset even if there's an error
         });
     }
 
@@ -101,48 +107,48 @@ export default function Generate() {
         setFlipped((prev) => ({
             ...prev,
             [id]: !prev[id],
-        }))
+        }));
     }
 
     const handleOpen = () => {
-        setOpen(true)
+        setOpen(true);
     }
 
     const handleClose = () => {
-        setOpen(false)
+        setOpen(false);
     }
 
     const saveFlashcards = async () => {
         if(!name) {
-            alert('Please enter a name')
-            return 
+            alert('Please enter a name');
+            return;
         }
-        const batch = writeBatch(db)
-        const userDocRef = doc(collection(db, 'users'), user.id)
-        const docSnap = await getDoc(userDocRef)
+        const batch = writeBatch(db);
+        const userDocRef = doc(collection(db, 'users'), user.id);
+        const docSnap = await getDoc(userDocRef);
 
         if(docSnap.exists()){
-            const collections = docSnap.data().flashcards || []
+            const collections = docSnap.data().flashcards || [];
             if (collections.find((f) => f.name === name)){
-                alert('Flashcard collection with the same name already exists')
-                return
+                alert('Flashcard collection with the same name already exists');
+                return;
             } else {
-                collections.push({name})
-                batch.set(userDocRef, {flashcards: collections}, {merge: true})
+                collections.push({name});
+                batch.set(userDocRef, {flashcards: collections}, {merge: true});
             }
         } else {
-            batch.set(userDocRef, {flashcards: [{name}]})
+            batch.set(userDocRef, {flashcards: [{name}]});
         }
 
-        const colRef = collection(userDocRef, name)
+        const colRef = collection(userDocRef, name);
         flashcards.forEach((flashcard) => {
-            const cardDocRef = doc(colRef)
-            batch.set(cardDocRef, flashcard)
-        })
+            const cardDocRef = doc(colRef);
+            batch.set(cardDocRef, flashcard);
+        });
 
-        await batch.commit()
-        handleClose()
-        router.push('/flashcards')
+        await batch.commit();
+        handleClose();
+        router.push('/flashcards');
     }
     
     return (
@@ -153,7 +159,13 @@ export default function Generate() {
                 }}>
                     {/* Home Icon */}
                     <Button onClick={() => router.push('/')} sx={{ mb: 4 }}>
-                        <HomeIcon sx={{ color: '#ffffff', fontSize: '40px' }} />
+                        <Image 
+                            src="/CareerSwipe.svg"  
+                            alt="CareerSwipe Logo"
+                            width={100}  
+                            height={100}
+                            style={{ objectFit: 'contain', cursor: 'pointer' }}
+                        />
                     </Button>
                     <Typography variant="h4" gutterBottom sx={{ color: '#ffffff', fontWeight: 'bold', textShadow: '0 0 10px #e91e63' }}>
                         Generate Careercards
@@ -174,18 +186,17 @@ export default function Generate() {
                         <Box mb={6} display='flex' justifyContent='center'>
                             {/* Button with file upload */}
                             <Button
-                            component="label"
-                            value={name}
-                            role={undefined}
-                            variant="contained"
-                            tabIndex={-1}
-                            startIcon={<CloudUploadIcon />}
+                                component="label"
+                                role={undefined}
+                                variant="contained"
+                                tabIndex={-1}
+                                startIcon={<CloudUploadIcon />}
                             >
-                            Upload resume
-                            <VisuallyHiddenInput
-                                type="file"
-                                onChange={handleUpload}
-                            />
+                                Upload resume
+                                <VisuallyHiddenInput
+                                    type="file"
+                                    onChange={handleUpload}
+                                />
                             </Button>
                         </Box>
 
@@ -194,6 +205,7 @@ export default function Generate() {
                             color="secondary" 
                             onClick={handleSubmit} 
                             fullWidth
+                            disabled={generating} // Disable the button if generating
                             sx={{
                                 bgcolor: '#e91e63',
                                 color: '#ffffff',
@@ -202,7 +214,7 @@ export default function Generate() {
                                 ':disabled': { bgcolor: '#b0bec5', color: '#ffffff' }
                             }}
                         >
-                            Submit
+                            {generating ? "Generating..." : "Submit"}
                         </Button>
                     </Paper>
                 </Box>
@@ -225,81 +237,67 @@ export default function Generate() {
                                     }}>
                                         <CardActionArea onClick={() => handleCardClick(index)}>
                                             <CardContent>
-                                                <Box sx={{
-                                                    perspective: '1000px',
-                                                    '& > div': {
-                                                        transition: 'transform 0.6s',
-                                                        transformStyle: 'preserve-3d',
-                                                        position: 'relative',
-                                                        width: '100%',
-                                                        height: '200px',
-                                                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                                                        transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                                                    },
-                                                    '& > div > div': {
-                                                        backfaceVisibility: 'hidden',
-                                                        position: 'absolute',
-                                                        width: '100%',
-                                                        height: '100%',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        textAlign: 'center',
-                                                    },
-                                                    '& > div > div:nth-of-type(2)': {
-                                                        transform: 'rotateY(180deg)',
-                                                    }
-                                                }}>
-                                                    <div>
-                                                        <div>{flashcard.front}</div>
-                                                        <div>{flashcard.back}</div>
-                                                    </div>
-                                                </Box>
+                                                <Typography variant="h6" gutterBottom>
+                                                    {flashcard.front}
+                                                </Typography>
+                                                {flipped[index] && (
+                                                    <Typography variant="body2">
+                                                        {flashcard.back}
+                                                    </Typography>
+                                                )}
                                             </CardContent>
                                         </CardActionArea>
                                     </Card>
                                 </Grid>
                             ))}
                         </Grid>
+
+                        <Box sx={{ mt: 4, textAlign: 'center' }}>
+                            <Button 
+                                variant="contained" 
+                                color="primary" 
+                                onClick={handleOpen} 
+                                sx={{
+                                    bgcolor: '#e91e63',
+                                    color: '#ffffff',
+                                    borderRadius: '4px',
+                                    ':hover': { bgcolor: '#d81b60' }
+                                }}
+                            >
+                                Save Flashcards
+                            </Button>
+                        </Box>
                     </Box>
                 )}
-                <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        onClick={handleOpen} 
-                        sx={{ bgcolor: '#e91e63', color: '#ffffff', ':hover': { bgcolor: '#d81b60' } }}
-                    >
-                        Save Flashcards
-                    </Button>
-                </Box>
+
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>Save Flashcards</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Please enter a name for your flashcard set.
+                        </DialogContentText>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            label="Flashcard Set Name"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="error">
+                            Cancel
+                        </Button>
+                        <Button onClick={saveFlashcards} color="primary">
+                            Save
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Container>
-
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Save Flashcard Set</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Enter a name for your flashcard set:
-                    </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        label="Flashcard Set Name"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        sx={{ mb: 2 }}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="error">Cancel</Button>
-                    <Button onClick={saveFlashcards} color="primary">Save</Button>
-                </DialogActions>
-            </Dialog>
-
             <Footer />
         </Box>
-    )
+    );
 }
