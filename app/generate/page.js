@@ -183,11 +183,12 @@ export default function Generate() {
                         />
 
                         <Typography align='center' color='#d81b60' gutterBottom> --- or ---</Typography>
-                        <Box mb={6} display='flex' justifyContent='center'>
+                        <Box mb={6} display='flex' justifyContent='center' color='d81b60'>
                             {/* Button with file upload */}
                             <Button
                                 component="label"
                                 role={undefined}
+                                variant="contained"
                                 tabIndex={-1}
                                 color='d81b60'
                                 startIcon={<CloudUploadIcon />}
