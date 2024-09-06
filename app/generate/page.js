@@ -8,8 +8,7 @@ import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionA
 import Footer from "@/components/Footer";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
-import HomeIcon from '@mui/icons-material/Home'; // Import HomeIcon
-import Image from 'next/image'; // Import Image for the logo
+import Image from 'next/image'; 
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -85,21 +84,21 @@ export default function Generate() {
             if (!res.ok) {
                 throw new Error('Network response was not ok');
             }
-            return res.text();  // Use .text() to handle any empty response
+            return res.text(); 
         })
         .then((text) => {
             if (text) {
-                return JSON.parse(text);  // Parse the text if it's not empty
+                return JSON.parse(text);  
             }
-            return {};  // Handle the case where the response body is empty
+            return {};  
         })
         .then((data) => {
             setFlashcards(data);
-            setGenerating(false); // Set generating state to false when done
+            setGenerating(false); 
         })
         .catch((error) => {
             console.error('There was a problem with the fetch operation:', error);
-            setGenerating(false); // Ensure generating state is reset even if there's an error
+            setGenerating(false); 
         });
     }
 
@@ -119,7 +118,7 @@ export default function Generate() {
     }
 
     const saveFlashcards = async () => {
-        if(!name) {
+        if (!name) {
             alert('Please enter a name');
             return;
         }
@@ -127,17 +126,17 @@ export default function Generate() {
         const userDocRef = doc(collection(db, 'users'), user.id);
         const docSnap = await getDoc(userDocRef);
 
-        if(docSnap.exists()){
+        if (docSnap.exists()) {
             const collections = docSnap.data().flashcards || [];
-            if (collections.find((f) => f.name === name)){
+            if (collections.find((f) => f.name === name)) {
                 alert('Flashcard collection with the same name already exists');
                 return;
             } else {
-                collections.push({name});
-                batch.set(userDocRef, {flashcards: collections}, {merge: true});
+                collections.push({ name });
+                batch.set(userDocRef, { flashcards: collections }, { merge: true });
             }
         } else {
-            batch.set(userDocRef, {flashcards: [{name}]});
+            batch.set(userDocRef, { flashcards: [{ name }] });
         }
 
         const colRef = collection(userDocRef, name);
@@ -237,14 +236,52 @@ export default function Generate() {
                                     }}>
                                         <CardActionArea onClick={() => handleCardClick(index)}>
                                             <CardContent>
-                                                <Typography variant="h6" gutterBottom>
-                                                    {flashcard.front}
-                                                </Typography>
-                                                {flipped[index] && (
-                                                    <Typography variant="body2">
+                                                <Box sx={{
+                                                    perspective: '1000px',
+                                                    '& > div': {
+                                                        transition: 'transform 0.6s',
+                                                        transformStyle: 'preserve-3d',
+                                                        position: 'relative',
+                                                        width: '100%',
+                                                        height: '200px',
+                                                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+                                                        borderRadius: '8px',
+                                                        bgcolor: '#333',
+                                                        color: '#ffffff'
+                                                    }
+                                                }}>
+                                                    <Box sx={{
+                                                        position: 'absolute',
+                                                        backfaceVisibility: 'hidden',
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        padding: '10px',
+                                                        fontSize: '16px',
+                                                        textAlign: 'center',
+                                                        transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                                                    }}>
+                                                        {flashcard.front}
+                                                    </Box>
+                                                    <Box sx={{
+                                                        position: 'absolute',
+                                                        backfaceVisibility: 'hidden',
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        padding: '10px',
+                                                        fontSize: '16px',
+                                                        textAlign: 'center',
+                                                        transform: flipped[index] ? 'rotateY(0deg)' : 'rotateY(180deg)',
+                                                        backgroundColor: '#4a4a4a'
+                                                    }}>
                                                         {flashcard.back}
-                                                    </Typography>
-                                                )}
+                                                    </Box>
+                                                </Box>
                                             </CardContent>
                                         </CardActionArea>
                                     </Card>
@@ -252,21 +289,21 @@ export default function Generate() {
                             ))}
                         </Grid>
 
-                        <Box sx={{ mt: 4, textAlign: 'center' }}>
-                            <Button 
-                                variant="contained" 
-                                color="primary" 
-                                onClick={handleOpen} 
-                                sx={{
-                                    bgcolor: '#e91e63',
-                                    color: '#ffffff',
-                                    borderRadius: '4px',
-                                    ':hover': { bgcolor: '#d81b60' }
-                                }}
-                            >
-                                Save Flashcards
-                            </Button>
-                        </Box>
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            onClick={handleOpen}
+                            fullWidth
+                            sx={{
+                                mt: 4,
+                                bgcolor: '#e91e63',
+                                color: '#ffffff',
+                                borderRadius: '4px',
+                                ':hover': { bgcolor: '#d81b60' }
+                            }}
+                        >
+                            Save Flashcards
+                        </Button>
                     </Box>
                 )}
 
@@ -274,30 +311,29 @@ export default function Generate() {
                     <DialogTitle>Save Flashcards</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Please enter a name for your flashcard set.
+                            Enter a name for your flashcard set.
                         </DialogContentText>
                         <TextField
                             autoFocus
                             margin="dense"
+                            id="name"
                             label="Flashcard Set Name"
                             type="text"
                             fullWidth
                             variant="standard"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            sx={{ bgcolor: '#333', color: '#ffffff' }}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose} color="error">
-                            Cancel
-                        </Button>
-                        <Button onClick={saveFlashcards} color="primary">
-                            Save
-                        </Button>
+                        <Button onClick={handleClose} color="error">Cancel</Button>
+                        <Button onClick={saveFlashcards} color="primary">Save</Button>
                     </DialogActions>
                 </Dialog>
+
+                <Footer />
             </Container>
-            <Footer />
         </Box>
     );
 }
