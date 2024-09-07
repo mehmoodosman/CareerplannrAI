@@ -68,6 +68,7 @@ export async function POST(req) {
                 { role: 'user', content: data },
             ],
             model: 'openai/gpt-3.5-turbo',
+            max_tokens: 1500, // Add max_tokens here
         });
 
     const careerpath = JSON.parse(completion.choices[0].message.content);

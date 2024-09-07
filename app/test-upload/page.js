@@ -102,6 +102,7 @@ export default function CareerPage() {
 
   return (
     <>
+    
     <Box sx={{ flexGrow: 1, bgcolor: '#121212', minHeight: '100vh', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 4 }}>
       <Container maxWidth="sm" sx={{ textAlign: 'center', bgcolor: '#1e1e1e', borderRadius: '20px', padding: 4, boxShadow: '0 8px 25px rgba(0, 0, 0, 0.5)' }}>
         
@@ -233,9 +234,11 @@ export default function CareerPage() {
   
           </Box>
         )}
+         {/* Moved footer up */}
+        <Footer />
       </Container>
     </Box>
-    <Footer />
-    </>
+   
+    </> 
   );
 }
