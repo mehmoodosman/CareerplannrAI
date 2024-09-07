@@ -62,8 +62,6 @@ export default function Home() {
           
         </Box>
 
-        <Box>BETA v.0.1</Box>
-
         {/* User buttons on the right end */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <SignedIn>
