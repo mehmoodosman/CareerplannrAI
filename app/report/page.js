@@ -9,6 +9,10 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import BrokenImageOutlinedIcon from '@mui/icons-material/BrokenImageOutlined';
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import Face2Icon from '@mui/icons-material/Face2';
+import SaveIcon from '@mui/icons-material/Save';
+import DeleteIcon from '@mui/icons-material/Delete';
+import PaidIcon from '@mui/icons-material/Paid';
 
 const careerPath = {
     title: 'Senior Product Manager',
@@ -47,16 +51,64 @@ const mentors = [
     },
 ]
 
+const steps = [
+    'Step 1: Gain a strong foundation in computer science by completing a degree in Computer Science',
+    'Step 2: Learn front-end development technologies such as HTML, CSS, and JavaScript.',
+    'Step 3: Get proficient in back-end development by learning languages like Node.js, Python, or Java',
+    'more to come'
+]
+
 export default function Report() {
+    function handleSave () {
+        console.log('TODO: Implement this')
+    }
+
+    function handleDelete () {
+        console.log('TODO: Implement this')
+    }
 
     return (
         <>
 <Container maxWidth="lg">
-      {/* Action container */}
-      <Box sx={{ padding: 2, mb: 2 }}>
-        <Typography variant="h1" color='#bbb'>This is a sample</Typography>
+    <Typography variant="h1" color='#bbb'>This is a sample</Typography>
 
-      </Box>
+      {/* Action container */}
+      <Box 
+        display="flex" 
+        justifyContent="flex-end" 
+        spacing={5} 
+        sx={{ padding: 2, mb: 2 }}
+        >
+            <Button
+                component="label"
+                onClick={handleSave}
+                variant="contained"
+                endIcon={<SaveIcon />}
+                sx={{
+                    mr: 2,
+                    backgroundColor: '#d81b60',
+                    color: 'white',
+                    '&:hover': {
+                        backgroundColor: '#c2185b', // Slightly darker shade for hover effect
+                    }
+                }}
+            > Save </Button>
+
+            <Button
+                component="label"
+                onClick={handleDelete}
+                variant="contained"
+                endIcon={<DeleteIcon />} 
+                sx={{
+                    mr: 2,
+                    backgroundColor: '#d81b60',
+                    color: 'white',
+                    '&:hover': {
+                        backgroundColor: '#c2185b', // Slightly darker shade for hover effect
+                    }
+                }}
+            > Delete </Button>
+        </Box>
 
       {/* Top Container */}
       <Box sx={{mt:2, mb: 4 }}>
@@ -189,9 +241,12 @@ export default function Report() {
 
               }}
             >
-                <Typography sx={{fontSize: 14}} color="white" align="center">
-                Annual average salary: $ xx,000.00
-                </Typography>
+                <Box display="flex" align='left'>
+                    <PaidIcon sx={{ mr: 1, color: '#e91e63' }} />
+                    <Typography sx={{  fontSize: 14, }} color="white">
+                        Annual average salary: $ xx,000.00
+                    </Typography>
+                </Box>
                 
             </Card>
           </Stack>
@@ -215,15 +270,12 @@ export default function Report() {
             <Typography variant="h6" sx={{ textAlign: 'left', mb: 2, color: '#c2185b', }}>
                 Road Map
             </Typography>
-
-            <Stack
-                sx={{
-                    minHeight: 200,
-            }}>
-                <Typography variant="h6" align="center">
-                    Middle Box
-                </Typography>
-            </Stack>
+            <CardMedia
+                component="img"
+                height="520"
+                image="/plan.jpg"
+                alt="plan"
+            />
             </CardContent>
           </Card>
         </Grid>
@@ -253,7 +305,8 @@ export default function Report() {
                         spacing={2}
                         sx={{ width: '100%', alignItems: 'center', mb: 1 }} // Added full width and alignment
                     >
-                        <Avatar alt={name} src="/static/images/avatar/1.jpg" />
+                        {/* <Avatar alt={name} src="" /> */}
+                        <Face2Icon alt={name} />
                         <Stack direction="column" width='100%'>
                             <Typography>{name}</Typography>
                             <Typography sx={{ fontSize: 14, color: '#bbb' }}>{title} ({duration})</Typography>

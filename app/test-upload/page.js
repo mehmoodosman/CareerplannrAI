@@ -175,7 +175,7 @@ export default function CareerPage() {
             <Button 
               type="submit"
               fullWidth
-              disabled={loading} 
+              disabled={!resume.trim()} 
               variant="contained" 
               sx={{
                 bgcolor: '#e91e63',
