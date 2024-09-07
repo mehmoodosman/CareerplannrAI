@@ -56,7 +56,17 @@ export default function Home() {
 
           </Link>
 
-          <Box sx={{ marginLeft: 2, color: 'blue', fontSize: '14px', fontWeight: 'bold' }}>
+          <Box
+            sx={{
+              marginLeft: 2,
+              color: 'green',
+              borderRadius: '8px',
+              fontSize: '12px',  // Smaller text size
+              fontWeight: '300', // Adjust font weight
+              border: '1px solid green', // Green bounding box
+              padding: '4px', // Optional padding inside the box
+            }}
+          >
             BETA v.0.1
           </Box>
           
