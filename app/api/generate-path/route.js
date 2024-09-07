@@ -55,8 +55,7 @@ Respond with JSON only. Never include any extra characters,  non-whitespace char
 
 export async function POST(req) {
     const openai = new OpenAI({
-        apiKey: process.env.OPENROUTER_API_KEY,
-        baseURL: "https://openrouter.ai/api/v1",
+        apiKey: process.env.OPENAI_API_KEY,  
     });
 
     try {
@@ -67,14 +66,14 @@ export async function POST(req) {
                 { role: 'system', content: systemPrompt },
                 { role: 'user', content: data },
             ],
-            model: 'openai/gpt-3.5-turbo',
-            max_tokens: 1500, // Add max_tokens here
+            model: "gpt-3.5-turbo",
+            temperature: 0.5,
         });
 
-    const careerpath = JSON.parse(completion.choices[0].message.content);
-    console.log("Careerpath response from the model: ", careerpath)
+        const careerpath = JSON.parse(completion.choices[0].message.content);
+        console.log("Careerpath response from the model: ", careerpath);
 
-    return NextResponse.json(careerpath);
+        return NextResponse.json(careerpath);
 
     } catch (error) {
         console.error("Error during API request:", error.message);
