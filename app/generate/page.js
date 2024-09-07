@@ -4,12 +4,13 @@ import { db } from "@/firebase";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Container, Box, Typography, CircularProgress, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
+import { Container, Box, Typography, Link, CircularProgress, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
 import Footer from "@/components/Footer";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
 import Image from 'next/image';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -275,6 +276,7 @@ export default function Generate() {
                                             <div>
                                                 <div>
                                                     <Typography variant="h6" component="div">{flashcard.front}</Typography>
+
                                                 </div>
                                                 <div>
                                                     <Typography variant="subtitle2" component="div">{flashcard.back}</Typography>
@@ -283,6 +285,11 @@ export default function Generate() {
                                         </Box>
                                     </CardContent>
                                 </CardActionArea>
+                                <CardContent>                                                     
+                                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+      <Typography sx={{ fontSize: 14, marginRight: 1 }}></Typography>
+      <Link href='/report' ><ArrowForwardRoundedIcon sx={{ color: '#e91e63' }} /></Link>
+    </Box></CardContent>
                             </Card>
                         </Grid>
                     ))}
