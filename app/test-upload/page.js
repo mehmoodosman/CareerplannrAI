@@ -117,10 +117,7 @@ export default function CareerPage() {
           />
         </Link>
 
-        <Typography variant="h3" sx={{
-          fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
-          textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
-        }}>
+        <Typography variant="h4" gutterBottom sx={{ color: '#ffffff', fontWeight: 'bold', textShadow: '0 0 10px #e91e63' }}>
           Career Recommendation
         </Typography>
 
@@ -149,23 +146,33 @@ export default function CareerPage() {
             }}
           />
 
-          <Typography color='#808080'> --- or ---</Typography>
+          <Typography align='center' color='#d81b60' gutterBottom>
+                --- or ---
+            </Typography>
 
-          {/* Button with file upload */}
-          <Button
-            component="label"
-            value={resume}
-            role={undefined}
-            variant="contained"
-            tabIndex={-1}
-            startIcon={<CloudUploadIcon />}
-          >
-            Upload resume
-            <VisuallyHiddenInput
-              type="file"
-              onChange={handleUpload}
-            />
-          </Button>
+            <Box mb={6} display='flex' justifyContent='center'>
+                {/* Button with file upload */}
+                <Button
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<CloudUploadIcon />}
+                    sx={{
+                        backgroundColor: '#d81b60',
+                        color: 'white',
+                        '&:hover': {
+                            backgroundColor: '#c2185b', // Slightly darker shade for hover effect
+                        }
+                    }}
+                >
+                  Upload resume
+                <VisuallyHiddenInput
+                    type="file"
+                    onChange={handleUpload}
+                />
+                </Button>
+              </Box>
 
           {/* Button with margin */}
           <Button 
