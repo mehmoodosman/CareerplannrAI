@@ -6,7 +6,6 @@ import {
     Typography,
   } from "@mui/material"
 import GitHubIcon from '@mui/icons-material/GitHub';
-import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 
 export const Footer = () => {
@@ -20,7 +19,6 @@ export const Footer = () => {
         <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
           {/* Feedback form */}
           <Box display='flex' justifyContent='center' alignItems='center' sx={{ marginBottom: 2 }}>
-            
             <Link 
               href='https://tally.so/r/3XYWx4' 
               target='_blank' 
@@ -31,38 +29,36 @@ export const Footer = () => {
                 textDecoration: 'none', 
                 padding: '8px 16px',
                 fontSize: '0.875rem', // Smaller font size
-                fontWeight: '300', // Thinner font weight
                 '&:hover': { textDecoration: 'none', color: 'inherit' },
                 '&:focus': { textDecoration: 'none', color: 'inherit' },
                 '&:active': { textDecoration: 'none', color: 'inherit' }
               }}
             >
-              <FeedbackIcon sx={{ fontSize: 24, color: '#e91e63', marginLeft: 1 }} />
-              <Typography sx={{ color: '#e91e63', margin:1 }}>
+              <FeedbackIcon sx={{ fontSize: 24, color: '#fff', marginLeft: 1 }} />
+              <Typography sx={{ color: '#fff', margin:1, fontWeight: 100 }}>
                 Your feedback helps us improve - share your thoughts!
               </Typography>
-              
             </Link>
           </Box>
 
           {/* Social media icons */}
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <IconButton component="a" href="https://github.com/mehmoodosman" target="_blank" sx={{ color: '#ffffff' }}>
+            <IconButton component="a" href="https://github.com/mehmoodosman" target="_blank" sx={{ color: '#888' }}>
               <GitHubIcon />
             </IconButton>
-            <IconButton component="a" href="https://github.com/BarnabasNovak1" target="_blank" sx={{ color: '#ffffff' }}>
+            <IconButton component="a" href="https://github.com/BarnabasNovak1" target="_blank" sx={{ color: '#888' }}>
               <GitHubIcon />
             </IconButton>
-            <IconButton component="a" href="https://github.com/mahmoodayesha" target="_blank" sx={{ color: '#ffffff' }}>
+            <IconButton component="a" href="https://github.com/mahmoodayesha" target="_blank" sx={{ color: '#888' }}>
               <GitHubIcon />
             </IconButton>
-            <IconButton component="a" href="https://github.com/itancio" target="_blank" sx={{ color: '#ffffff' }}>
+            <IconButton component="a" href="https://github.com/itancio" target="_blank" sx={{ color: '#888' }}>
               <GitHubIcon />
             </IconButton>
           </Box>
           
           {/* Disclaimer */}
-          <Typography variant="body1" color="" sx={{ marginBottom: 1, fontSize: 14, color: '#bbb' }}>
+          <Typography variant="body1" color="" sx={{ marginBottom: 1, fontSize: 14, color: '#888' }}>
             © {new Date().getFullYear()} CareerSwipe AI. All rights reserved.
           </Typography>
         </Container>
