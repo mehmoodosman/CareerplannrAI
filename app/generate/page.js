@@ -4,7 +4,7 @@ import { db } from "@/firebase";
 import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Container, Box, Typography, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
+import { Container, Box, Typography, CircularProgress, Paper, TextField, Button, Card, CardActionArea, CardContent, Grid, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from "@mui/material";
 import Footer from "@/components/Footer";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
@@ -179,7 +179,7 @@ export default function Generate() {
                             multiline
                             rows={8}
                             variant="outlined"
-                            sx={{ mb: 2, bgcolor: '#333', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
+                            sx={{ mb: 2, bgcolor: '#2c2c2c', '& .MuiInputBase-input': { color: '#ffffff' }, '& .MuiFormLabel-root': { color: '#ffffff' }}}
                         />
 
 <Typography align='center' color='#d81b60' gutterBottom>
@@ -218,12 +218,12 @@ export default function Generate() {
                             sx={{
                                 bgcolor: '#e91e63',
                                 color: '#ffffff',
-                                borderRadius: '4px',
+                                borderRadius: '25px',
                                 ':hover': { bgcolor: '#d81b60' },
                                 ':disabled': { bgcolor: '#b0bec5', color: '#ffffff' }
                             }}
                         >
-                            {generating ? "Generating..." : "Submit"}
+                            {generating ? <CircularProgress size={24} sx={{ color: 'white' }} /> : "Submit"}
                         </Button>
                     </Paper>
                 </Box>
