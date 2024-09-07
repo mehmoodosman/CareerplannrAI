@@ -35,3 +35,9 @@ Error: PDFLoader cannot be found, run this command on your terminal:
 
 Error: Next issue. Update  Next by running this command on your terminal
 ```npm i next@latest react@latest react-dom@latest eslint-config-next@latest```
+
+Error:
+
+```bash
+git config http.postBuffer 524288000
+```

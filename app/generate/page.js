@@ -214,7 +214,7 @@ export default function Generate() {
                             color="secondary" 
                             onClick={handleSubmit} 
                             fullWidth
-                            disabled={generating} 
+                            disabled={!text.trim()} 
                             sx={{
                                 bgcolor: '#e91e63',
                                 color: '#ffffff',

@@ -42,7 +42,7 @@ export default function Home() {
     {/* Navbar */}
     <AppBar position="static" sx={{ backgroundColor: '#1e1e1e', boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)', borderBottom: '4px solid #e91e63' }}>
       <Toolbar>
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
           {/* Logo wrapped in Link */}
           <Link href="/" passHref>
 
@@ -55,7 +55,14 @@ export default function Home() {
             />
 
           </Link>
+
+          <Box sx={{ marginLeft: 2, color: 'blue', fontSize: '14px', fontWeight: 'bold' }}>
+            BETA v.0.1
+          </Box>
+          
         </Box>
+
+        <Box>BETA v.0.1</Box>
 
         {/* User buttons on the right end */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
