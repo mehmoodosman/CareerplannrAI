@@ -244,7 +244,7 @@ export default function Generate() {
                                                 transformStyle: 'preserve-3d',
                                                 position: 'relative',
                                                 width: '100%',
-                                                height: '200px',
+                                                height: '300px',
                                                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                                                 transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
                                             },
