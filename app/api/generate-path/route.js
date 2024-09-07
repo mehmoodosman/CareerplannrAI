@@ -55,7 +55,7 @@ Respond with JSON only. Never include any extra characters,  non-whitespace char
 
 export async function POST(req) {
     const openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY,  
+        apiKey: process.env.OPENROUTER_API_KEY,  
     });
 
     try {
