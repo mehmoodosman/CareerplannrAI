@@ -1,5 +1,18 @@
 # CareerSwipe
 
+# Get Early Access to CareerPlannr AI! 🚀
+
+Discover your next career move with **CareerPlannr AI**. Our AI-powered platform helps you explore personalized career paths based on your LinkedIn profile or resume.
+
+## 🌟 Why Early Access?
+
+- **Personalized Career Paths** tailored just for you.
+- **Exclusive Features** before the official launch.
+- **Shape the Future**: Share your feedback to improve CareerPlannr AI.
+
+[Sign Up for Early Access Now!](https://careerplannr-ai.vercel.app/)
+
+
 ## Overview
 Careerplannr AI is a web application that provides personalized career path recommendations in a user-friendly, swipe-able interface. Users can import their LinkedIn profiles or resumes to generate tailored career suggestions. Favorited career paths will be saved to a profile dashboard, where users can access a detailed roadmap for each selected option.
 
@@ -12,7 +25,7 @@ Careerplannr AI is a web application that provides personalized career path reco
 * Clerk
 * Firebase
 * Pinecone
-
+* Stripe
 
 ## Developer Documentation
 ### Troubleshooting
@@ -35,3 +48,9 @@ Error: PDFLoader cannot be found, run this command on your terminal:
 
 Error: Next issue. Update  Next by running this command on your terminal
 ```npm i next@latest react@latest react-dom@latest eslint-config-next@latest```
+
+Error:
+
+```bash
+git config http.postBuffer 524288000
+```
