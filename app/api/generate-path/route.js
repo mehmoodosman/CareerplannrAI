@@ -14,12 +14,15 @@ based on the candidate’s skills and experience on the resume. Each entry shoul
     c. required skills, and 
     d. potential career outlook.
 3. An analysis of the strengths the candidate possess based on the provided resume
+   that aligns with the recommended career.
 4. An analysis of the weaknesses the candidate may have based on the provided resume
    and the recommended job title.
 
 The goal is to offer a clear and informative description and a fitting job title.
 1. Conciseness: Keep descriptions brief and to the point to provide a quick overview.
 2. Clarity: Use straightforward language to ensure the information is easily understood.
+
+Make sure to get the first name from the resume provided.
 
 Return the list in the following JSON format:
 {

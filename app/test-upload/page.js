@@ -228,7 +228,7 @@ export default function CareerPage() {
 
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
               <Typography sx={{ fontSize: 14, marginRight: 1 }}>Get detailed report</Typography>
-              <Link href='/' ><ArrowForwardRoundedIcon sx={{ color: '#e91e63' }} /></Link>
+              <Link href='/report' ><ArrowForwardRoundedIcon sx={{ color: '#e91e63' }} /></Link>
             </Box>
   
           </Box>
