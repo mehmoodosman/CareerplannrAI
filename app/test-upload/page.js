@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
 import { Box, Button, Container, Divider, Paper, Stack, Typography, TextField, CircularProgress } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
@@ -30,6 +31,8 @@ export default function CareerPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [file, setFile] = useState(null)
+
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
