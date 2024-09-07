@@ -7,6 +7,8 @@ import {
   } from "@mui/material"
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FeedbackIcon from '@mui/icons-material/Feedback';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 export const Footer = () => {
     return (
@@ -17,6 +19,7 @@ export const Footer = () => {
         bgcolor: '#1e1e1e', padding: 1, borderTop: '4px solid #e91e63', position: 'relative', bottom: 0, width: '100%', color: '#fff'
       }}>
         <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
+
           {/* Feedback form */}
           <Box display='flex' justifyContent='center' alignItems='center' sx={{ marginBottom: 2 }}>
             <Link 
@@ -34,10 +37,11 @@ export const Footer = () => {
                 '&:active': { textDecoration: 'none', color: 'inherit' }
               }}
             >
-              <FeedbackIcon sx={{ fontSize: 24, color: '#fff', marginLeft: 1 }} />
+              <KeyboardDoubleArrowRightIcon sx={{ fontSize: 24, color: '#e91e63', marginLeft: 1 }} />
               <Typography sx={{ color: '#fff', margin:1, fontWeight: 100 }}>
                 Your feedback helps us improve - share your thoughts!
               </Typography>
+              <KeyboardDoubleArrowLeftIcon sx={{ fontSize: 24, color: '#e91e63', marginLeft: 1 }} />
             </Link>
           </Box>
 
