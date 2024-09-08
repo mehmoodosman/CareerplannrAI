@@ -61,10 +61,11 @@ export default function Home() {
               marginLeft: 2,
               color: 'green',
               borderRadius: '8px',
-              fontSize: '12px',  // Smaller text size
+              fontSize: '11px',  // Smaller text size
               fontWeight: '300', // Adjust font weight
               border: '1px solid green', // Green bounding box
               padding: '4px', // Optional padding inside the box
+              align: 'center',
             }}
           >
             BETA v.0.1
@@ -102,7 +103,7 @@ export default function Home() {
                   textTransform: 'none',
                   fontWeight: 'bold',
                   borderRadius: '25px',
-                  padding: '10px 20px',
+                  padding: '6px 12px',
                   boxShadow: '0 4px 15px rgba(233, 30, 99, 0.4)',
                   ':hover': { backgroundColor: '#c2185b', boxShadow: '0 6px 20px rgba(233, 30, 99, 0.6)' },
                 }}
@@ -118,53 +119,55 @@ export default function Home() {
 
     {/* Hero Section */}
     <Container maxWidth="md" sx={{ textAlign: 'center', marginTop: 8 }}>
-      <Typography variant="h3" gutterBottom sx={{
-        fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
-        textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
-      }}>
-        Welcome to CareerSwipe AI
-      </Typography>
-      <Typography variant="h5" color="textSecondary" gutterBottom sx={{
-        fontFamily: 'Roboto, sans-serif', color: '#bbbbbb',
-        textShadow: '0 0 10px rgba(255, 255, 255, 0.5)'
-      }}>
-        Your ultimate tool for career exploration and planning. Unlock your potential today!
-      </Typography>
-      <Box
-        component="img"
-        src="/Image.png"
-        alt="Careerplannr AI"
-        sx={{
-          maxWidth: '100%', height: 'auto', borderRadius: '25px', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.2)',
-          marginTop: 4, marginBottom: 4, transition: 'transform 0.5s', ':hover': { transform: 'scale(1.05)' }
-        }}
-      />
-      {/* <Button variant="contained" size="large" sx={{
+  <Typography variant="h3" gutterBottom sx={{
+    fontWeight: 'bold', fontFamily: 'Roboto, sans-serif', color: '#ffffff', letterSpacing: '2px',
+    textShadow: '0 0 15px rgba(255, 255, 255, 0.6)'
+  }}>
+    Welcome to CareerSwipe AI
+  </Typography>
+  <Typography variant="h5" color="textSecondary" gutterBottom sx={{
+    fontFamily: 'Roboto, sans-serif', color: '#bbbbbb',
+    textShadow: '0 0 10px rgba(255, 255, 255, 0.5)'
+  }}>
+    Your ultimate tool for career exploration and planning. Unlock your potential today!
+  </Typography>
+  <Box
+    component="img"
+    src="/Image.png"
+    alt="Careerplannr AI"
+    sx={{
+      maxWidth: '100%', height: 'auto', borderRadius: '25px', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.2)',
+      marginTop: 4, marginBottom: 4, transition: 'transform 0.5s', ':hover': { transform: 'scale(1.05)' }
+    }}
+  />
+  <Box 
+    sx={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      flexDirection: { xs: 'column', sm: 'row' }, 
+      alignItems: 'center' 
+    }}
+  >
+    <Link href="/test-upload" passHref legacyBehavior>
+      <Button variant="contained" size="large" sx={{
         backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
-        padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+        padding: '14px 40px', marginBottom: 2, marginRight: { xs: 0, sm: 2 }, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
         ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
       }}>
-        Start Your Career Exploration
-      </Button> */}
-      <Link href="/test-upload" passHref legacyBehavior>
-    <Button variant="contained" size="large" sx={{
-      backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
-      padding: '14px 40px', marginBottom: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
-      ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
-    }}>
-      Start Your Career Recommendations
-    </Button>
-  </Link>
-  <Link href="/generate" passHref legacyBehavior>
-    <Button variant="contained" size="large" sx={{
-      backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
-      padding: '14px 40px', marginBottom: 8, marginLeft: 8, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
-      ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
-    }}>
-      Start Your Career Cards Exploration
-    </Button>
-  </Link>
-    </Container>
+        Start Your Career Recommendations
+      </Button>
+    </Link>
+    <Link href="/generate" passHref legacyBehavior>
+      <Button variant="contained" size="large" sx={{
+        backgroundColor: '#e91e63', color: 'white', textTransform: 'none', fontWeight: 'bold', borderRadius: '50px',
+        padding: '14px 40px', marginBottom: 2, marginLeft: { xs: 0, sm: 2 }, boxShadow: '0 6px 20px rgba(233, 30, 99, 0.4)',
+        ':hover': { backgroundColor: '#c2185b', boxShadow: '0 8px 25px rgba(233, 30, 99, 0.6)' }
+      }}>
+        Start Your Career Cards Exploration
+      </Button>
+    </Link>
+  </Box>
+</Container>
 
 
     {/* Features Section */}
