@@ -185,7 +185,7 @@ export default function CareerPage() {
                 color: '#ffffff',
                 borderRadius: '25px',
                 ':hover': { bgcolor: '#d81b60' },
-                ':disabled': { bgcolor: '#b0bec5', color: '#ffffff' }
+                ':disabled': { bgcolor: '##bbb', color: '#888' }
             }}
             >
               {loading ? <CircularProgress size={24} sx={{ color: 'white' }} /> : 'GET RECOMMENDATION'}

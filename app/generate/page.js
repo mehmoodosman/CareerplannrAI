@@ -221,7 +221,7 @@ export default function Generate() {
                                 color: '#ffffff',
                                 borderRadius: '25px',
                                 ':hover': { bgcolor: '#d81b60' },
-                                ':disabled': { bgcolor: '#b0bec5', color: '#ffffff' }
+                                ':disabled': { bgcolor: '##bbb', color: '#888' }
                             }}
                         >
                             {generating ? <CircularProgress size={24} sx={{ color: 'white' }} /> : "Submit"}
@@ -287,9 +287,10 @@ export default function Generate() {
                                 </CardActionArea>
                                 <CardContent>                                                     
                                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-      <Typography sx={{ fontSize: 14, marginRight: 1 }}></Typography>
-      <Link href='/report' ><ArrowForwardRoundedIcon sx={{ color: '#e91e63' }} /></Link>
-    </Box></CardContent>
+                                    <Typography sx={{ fontSize: 14, marginRight: 1 }}></Typography>
+                                    <Link href='/report' ><ArrowForwardRoundedIcon sx={{ color: '#e91e63' }} /></Link>
+                                    </Box>
+                                </CardContent>
                             </Card>
                         </Grid>
                     ))}
